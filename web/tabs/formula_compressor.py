@@ -6,6 +6,8 @@ from typing import Optional, Literal, Tuple
 import sys
 sys.path.append("web")
 from components.airtable_client import get_local_storage_metadata, find_field_by_id
+from components.async_operations import defer_execution
+from components.loading import show_loading, hide_loading
 
 
 def compress_formula(
@@ -352,6 +354,7 @@ def initialize():
     window.compressFormulaFromUI = compress_formula_from_ui
     window.convertFormulaDisplay = convert_formula_display
     window.generateTableReportData = generate_table_report_data
+    window.generateTableReportAsync = generate_table_report_async
     window.formatFormulaCompact = format_formula_compact
     window.formatFormulaLogical = format_formula_logical
 
@@ -474,6 +477,54 @@ def generate_table_report_data(table_name: str, compression_depth: Optional[int]
             ])
     
     return output.getvalue()
+
+
+def generate_table_report_async(table_name: str, compression_depth: Optional[int]):
+    """Generate a CSV report asynchronously with loading state.
+    
+    This function handles the UI updates and backgrounds the heavy CSV generation work.
+    Called from JavaScript via window.generateTableReportAsync.
+    
+    Args:
+        table_name: Name of the table to analyze
+        compression_depth: How many levels deep to compress (None = fully)
+    """
+    # Show loading spinner immediately
+    spinner_html = '''
+    <div class="flex flex-col items-center justify-center py-8">
+        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-primary-600 dark:border-primary-400 mb-4"></div>
+        <p class="text-gray-600 dark:text-gray-400">Generating CSV report...</p>
+        <p class="text-sm text-gray-500 dark:text-gray-500 mt-2">This may take a moment for large tables</p>
+    </div>
+    '''
+    
+    # We need to signal JavaScript that we're starting (JavaScript will handle the actual UI)
+    # Call JavaScript function to show loading
+    try:
+        window.showTableReportLoading()
+    except:
+        print("Could not call showTableReportLoading - continuing anyway")
+    
+    # Defer the heavy work to allow UI to update
+    def do_generation():
+        try:
+            print(f"Starting CSV generation for table: {table_name}")
+            csv_data = generate_table_report_data(table_name, compression_depth)
+            print(f"CSV generation complete, calling JavaScript callback")
+            
+            # Call JavaScript function to handle the download
+            window.handleTableReportComplete(csv_data, table_name)
+            
+        except Exception as e:
+            error_msg = f"Error generating table report: {str(e)}"
+            print(error_msg)
+            try:
+                window.handleTableReportError(str(e))
+            except:
+                print("Could not call handleTableReportError")
+    
+    # Defer execution by 100ms to ensure loading UI renders
+    defer_execution(do_generation, 100)
 
 
 def compress_formula_from_ui(

@@ -1,1 +1,1 @@
-"""Tab modules for different Airtable analysis tools"""
+"""Tab modules for different AirTable Powertools"""

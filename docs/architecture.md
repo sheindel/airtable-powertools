@@ -2,7 +2,7 @@
 
 ## Overview
 
-Airtable Analysis Tools is a dual-environment Python application that analyzes Airtable bases through dependency mapping, formula compression, schema generation, and advanced graph-based analysis. The system operates in two distinct contexts:
+AirTable Powertools is a dual-environment Python application that analyzes Airtable bases through dependency mapping, formula compression, schema generation, and advanced graph-based analysis. The system operates in two distinct contexts:
 
 1. **CLI Environment**: Server-side Python application using standard libraries
 2. **Web Environment**: Browser-based PyScript application with no backend
@@ -156,7 +156,7 @@ PyScript enables running Python code directly in the browser without a backend s
 ### Configuration: `web/pyscript.toml`
 
 ```toml
-name = "Airtable Analysis Tools"
+name = "AirTable Powertools"
 version = "0.2.0"
 packages = ["networkx"]  # Python packages available in browser
 

@@ -5,7 +5,7 @@
  */
 
 import { getSchema } from "../components/ui/schema-store.js";
-import { escapeHtml } from "./dom-utils.js";
+import { escapeHtml, enableButton, disableButton } from "./dom-utils.js";
 
 interface ScorecardField {
     complexity_score: number;
@@ -86,8 +86,16 @@ export function refreshComplexityScorecard(): void {
 
                 updateComplexitySummary();
                 renderScorecardTable();
+                
+                // Enable the download button now that we have data
+                if (scorecardData.length > 0) {
+                    enableButton("download-scorecard-csv-btn");
+                } else {
+                    disableButton("download-scorecard-csv-btn");
+                }
             } catch (error) {
                 console.error("Error getting complexity data:", error);
+                disableButton("download-scorecard-csv-btn");
                 if (tbody) {
                     tbody.innerHTML = `
                         <tr>
@@ -100,6 +108,7 @@ export function refreshComplexityScorecard(): void {
             }
         } else {
             alert("Complexity scorecard is not yet initialized. Please refresh the page.");
+            disableButton("download-scorecard-csv-btn");
         }
     }, 50);
 }

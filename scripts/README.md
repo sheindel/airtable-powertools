@@ -1,6 +1,6 @@
 # Development Scripts
 
-This directory contains development and debugging tools for the Airtable Analysis Tools project.
+This directory contains development and debugging tools for the AirTable Powertools project.
 
 ## Directory Structure
 

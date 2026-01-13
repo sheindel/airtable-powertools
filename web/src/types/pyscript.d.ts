@@ -63,9 +63,15 @@ declare global {
       displayFormat: 'compact' | 'logical'
     ): void;
     generateTableReportData(tableName: string, compressionDepth: number | null): string;
+    generateTableReportAsync(tableName: string, compressionDepth: number | null): void;
     convertFormulaDisplay(formula: string, outputFormat: 'field_ids' | 'field_names'): string;
     formatFormulaCompact(formula: string): string;
     formatFormulaLogical(formula: string): string;
+    
+    // Callbacks for async table report generation (called from Python)
+    showTableReportLoading?(): void;
+    handleTableReportComplete?(csvData: string, tableName: string): void;
+    handleTableReportError?(errorMessage: string): void;
     
     // Formula Evaluator Tab (web/tabs/formula_evaluator.py)
     loadFieldDependencies(): void;

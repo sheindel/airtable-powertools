@@ -1,4 +1,4 @@
-# Airtable Analysis Tools
+# AirTable Powertools
 
 A dual-environment Python application for analyzing Airtable bases with graph-based dependency mapping, formula analysis, and schema generation. Works as both a CLI tool and browser-based web application (no backend required).
 

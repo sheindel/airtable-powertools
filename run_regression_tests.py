@@ -2,7 +2,7 @@
 """
 AI-Executable Regression Test Runner
 
-This script orchestrates the regression test suite for the Airtable Analysis Tools.
+This script orchestrates the regression test suite for the AirTable Powertools.
 It can be executed by an AI agent to verify all functionality is working correctly.
 
 Usage:
@@ -466,7 +466,7 @@ class TestRunner:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Run regression tests for Airtable Analysis Tools"
+        description="Run regression tests for AirTable Powertools"
     )
     parser.add_argument(
         "--phase",

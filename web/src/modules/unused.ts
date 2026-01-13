@@ -5,7 +5,7 @@
  */
 
 import { getSchema } from "../components/ui/schema-store.js";
-import { escapeHtml } from "./dom-utils.js";
+import { escapeHtml, enableButton, disableButton } from "./dom-utils.js";
 import { toast } from "./toast.js";
 
 interface UnusedField {
@@ -85,13 +85,22 @@ export function refreshUnusedFields(): void {
 
             updateUnusedSummary();
             renderUnusedTable();
+            
+            // Enable the download button now that we have data
+            if (unusedFieldsData.length > 0) {
+                enableButton("download-unused-csv-btn");
+            } else {
+                disableButton("download-unused-csv-btn");
+            }
         } catch (error) {
             console.error("Error getting unused fields data:", error);
             console.error("Error details:", (error as Error).message, (error as Error).stack);
             toast.error(`Failed to get unused fields data. Make sure you have loaded a schema. Error: ${(error as Error).message || error}`);
+            disableButton("download-unused-csv-btn");
         }
     } else {
         toast.error("Unused fields detector is not yet initialized. Please refresh the page.");
+        disableButton("download-unused-csv-btn");
     }
 }
 

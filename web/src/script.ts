@@ -235,6 +235,7 @@ function wireDropdowns(): void {
     const grapherFieldDropdown = getDropdown("grapher-field-dropdown");
     const evalTableDropdown = getDropdown("eval-table-dropdown");
     const evalFieldDropdown = getDropdown("eval-field-dropdown");
+    const evaluatorTableDropdown = getDropdown("evaluator-table-dropdown");
 
     if (tableDropdown) {
         tableDropdown.addEventListener('select', (event: Event) => {
@@ -325,6 +326,19 @@ function wireDropdowns(): void {
                     }
                 } catch (error) {
                     console.error('Error calling loadFieldDependencies:', error);
+                }
+            }
+        });
+    }
+    
+    if (evaluatorTableDropdown) {
+        evaluatorTableDropdown.addEventListener('select', (event: Event) => {
+            const customEvent = event as CustomEvent<DropdownOption>;
+            if (customEvent.detail && customEvent.detail.id) {
+                // Enable the generate evaluator button when a table is selected
+                const generateBtn = document.getElementById("generate-evaluator-btn") as HTMLButtonElement | null;
+                if (generateBtn) {
+                    generateBtn.disabled = false;
                 }
             }
         });
@@ -561,7 +575,59 @@ function updateEvalFieldDropdown(tableId: string): void {
     setDropdownOptions("eval-field-dropdown", fieldOptions);
 }
 
-// Export functions that are called from HTML
+/**
+ * Enable Dependency Mapper mermaid action buttons
+ * Called from Python after a graph is generated
+ */
+function enableDependencyMapperButtons(): void {
+    const buttonIds = [
+        "download-mermaid-svg-btn",
+        "open-mermaid-live-btn",
+        "copy-mermaid-btn",
+        "toggle-mermaid-fullscreen-btn",
+        "download-mermaid-text-btn"
+    ];
+    
+    buttonIds.forEach(id => {
+        const button = document.getElementById(id) as HTMLButtonElement | null;
+        if (button) {
+            button.disabled = false;
+        }
+    });
+}
+
+/**
+ * Enable Formula Grapher mermaid action buttons
+ * Called from Python after a graph is generated
+ */
+function enableFormulaGrapherButtons(): void {
+    const buttonIds = [
+        "download-grapher-svg-btn",
+        "open-grapher-live-btn",
+        "copy-grapher-mermaid-btn",
+        "toggle-grapher-fullscreen-btn"
+    ];
+    
+    buttonIds.forEach(id => {
+        const button = document.getElementById(id) as HTMLButtonElement | null;
+        if (button) {
+            button.disabled = false;
+        }
+    });
+}
+
+// Export functions that are called from HTML or Python
 window.fetchSchemaAndUpdateUI = fetchSchemaAndUpdateUI;
 window.fetchSchema = fetchSchema;
 window.loadSampleSchema = loadSampleSchema;
+
+// Export button enabling functions for Python to call
+declare global {
+    interface Window {
+        enableDependencyMapperButtons: () => void;
+        enableFormulaGrapherButtons: () => void;
+    }
+}
+
+window.enableDependencyMapperButtons = enableDependencyMapperButtons;
+window.enableFormulaGrapherButtons = enableFormulaGrapherButtons;

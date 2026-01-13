@@ -1,4 +1,4 @@
-# Airtable Analysis Tools - AI Agent Instructions
+# AirTable Powertools - AI Agent Instructions
 
 ## Project Overview
 

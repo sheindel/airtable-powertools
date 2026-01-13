@@ -121,3 +121,41 @@ export function formatRelativeTime(timestamp: string): string {
         return `${diffYear} years ago`;
     }
 }
+
+/**
+ * Enable a button by removing the disabled attribute
+ * @param buttonId - The ID of the button to enable
+ */
+export function enableButton(buttonId: string): void {
+    const button = document.getElementById(buttonId) as HTMLButtonElement | null;
+    if (button) {
+        button.disabled = false;
+    }
+}
+
+/**
+ * Disable a button by adding the disabled attribute
+ * @param buttonId - The ID of the button to disable
+ */
+export function disableButton(buttonId: string): void {
+    const button = document.getElementById(buttonId) as HTMLButtonElement | null;
+    if (button) {
+        button.disabled = true;
+    }
+}
+
+/**
+ * Enable multiple buttons by removing the disabled attribute
+ * @param buttonIds - Array of button IDs to enable
+ */
+export function enableButtons(buttonIds: string[]): void {
+    buttonIds.forEach(enableButton);
+}
+
+/**
+ * Disable multiple buttons by adding the disabled attribute
+ * @param buttonIds - Array of button IDs to disable
+ */
+export function disableButtons(buttonIds: string[]): void {
+    buttonIds.forEach(disableButton);
+}

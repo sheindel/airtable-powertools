@@ -1,4 +1,4 @@
-# Test Suite for Airtable Analysis Tools
+# Test Suite for AirTable Powertools
 
 This directory contains unit tests for the core Python business logic.
 

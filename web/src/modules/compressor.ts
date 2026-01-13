@@ -212,6 +212,65 @@ export function copyCompressedFormula(): void {
 }
 
 /**
+ * Show loading state for table report generation
+ */
+function showTableReportLoading(): void {
+    const button = document.getElementById("table-report-btn") as HTMLButtonElement | null;
+    if (button) {
+        button.disabled = true;
+        button.innerHTML = '<span class="inline-flex items-center"><svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>Generating CSV...</span>';
+    }
+}
+
+/**
+ * Handle completion of table report generation
+ */
+function handleTableReportComplete(csvData: string, tableName: string): void {
+    try {
+        const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
+        const link = document.createElement("a");
+        const url = URL.createObjectURL(blob);
+        const timestamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, -5);
+        const filename = `${tableName}_formula_report_${timestamp}.csv`;
+
+        link.setAttribute("href", url);
+        link.setAttribute("download", filename);
+        link.style.visibility = "hidden";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        toast.success(`Table report generated successfully for "${tableName}"!`);
+    } catch (error) {
+        console.error("Error downloading CSV:", error);
+        const errorMessage = error instanceof Error ? error.message : String(error);
+        toast.error(`Failed to download CSV: ${errorMessage}`);
+    } finally {
+        // Restore button state
+        const button = document.getElementById("table-report-btn") as HTMLButtonElement | null;
+        if (button) {
+            button.disabled = false;
+            button.innerHTML = 'All Table Formulas Compressed (CSV)';
+        }
+    }
+}
+
+/**
+ * Handle error during table report generation
+ */
+function handleTableReportError(errorMessage: string): void {
+    console.error("Error generating table report:", errorMessage);
+    toast.error(`Failed to generate table report: ${errorMessage}`);
+    
+    // Restore button state
+    const button = document.getElementById("table-report-btn") as HTMLButtonElement | null;
+    if (button) {
+        button.disabled = false;
+        button.innerHTML = 'All Table Formulas Compressed (CSV)';
+    }
+}
+
+/**
  * Generate a CSV report for all formulas in the selected table
  */
 export function generateTableReport(): void {
@@ -229,27 +288,20 @@ export function generateTableReport(): void {
     const depthValue = depthInput?.value.trim() || "";
     const compressionDepth = depthValue ? parseInt(depthValue, 10) : null;
 
-    if (typeof window.generateTableReportData !== "undefined") {
+    // Use the async version that backgrounds the heavy work
+    if (typeof window.generateTableReportAsync !== "undefined") {
         try {
-            const csvData = window.generateTableReportData(tableName, compressionDepth);
-            const blob = new Blob([csvData], { type: "text/csv;charset=utf-8;" });
-            const link = document.createElement("a");
-            const url = URL.createObjectURL(blob);
-            const timestamp = new Date().toISOString().replace(/[:.]/g, "-").slice(0, -5);
-            const filename = `${tableName}_formula_report_${timestamp}.csv`;
-
-            link.setAttribute("href", url);
-            link.setAttribute("download", filename);
-            link.style.visibility = "hidden";
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-
-            toast.success(`Table report generated successfully for "${tableName}"!`);
+            // Export callback functions to window for Python to call
+            window.showTableReportLoading = showTableReportLoading;
+            window.handleTableReportComplete = handleTableReportComplete;
+            window.handleTableReportError = handleTableReportError;
+            
+            // Call async version
+            window.generateTableReportAsync(tableName, compressionDepth);
         } catch (error) {
-            console.error("Error generating table report:", error);
+            console.error("Error starting table report generation:", error);
             const errorMessage = error instanceof Error ? error.message : String(error);
-            toast.error(`Failed to generate table report: ${errorMessage}`);
+            toast.error(`Failed to start table report generation: ${errorMessage}`);
         }
     } else {
         toast.error("Table report generation is not yet initialized. Please refresh the page.");

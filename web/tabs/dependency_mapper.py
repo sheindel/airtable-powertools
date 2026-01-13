@@ -126,6 +126,9 @@ def update_mermaid_graph(table_id: str, field_id: str, flowchart_type: str):
             mermaid_container = document.getElementById("mermaid-container")
             mermaid_container.innerHTML = f'<div class="mermaid">{mermaid_text}</div>'
             window.mermaid.run()
+            # Enable the mermaid action buttons
+            if hasattr(window, 'enableDependencyMapperButtons'):
+                window.enableDependencyMapperButtons()
             return
         
         airtable_metadata = get_local_storage_metadata()
@@ -185,6 +188,9 @@ def update_mermaid_graph(table_id: str, field_id: str, flowchart_type: str):
         mermaid_container = document.getElementById("mermaid-container")
         mermaid_container.innerHTML = f'<div class="mermaid">{mermaid_text}</div>'
         window.mermaid.run()
+        # Enable the mermaid action buttons
+        if hasattr(window, 'enableDependencyMapperButtons'):
+            window.enableDependencyMapperButtons()
     except:
         import traceback
         error_message = traceback.format_exc()
@@ -238,6 +244,9 @@ def parameters_changed():
         mermaid_container = document.getElementById("mermaid-container")
         mermaid_container.innerHTML = f'<div class="mermaid">{mermaid_text}</div>'
         window.mermaid.run()
+        # Enable the mermaid action buttons
+        if hasattr(window, 'enableDependencyMapperButtons'):
+            window.enableDependencyMapperButtons()
         return
     
     update_mermaid_graph(table_id, field_id, direction)

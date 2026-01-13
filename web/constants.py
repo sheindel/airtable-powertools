@@ -1,4 +1,4 @@
-"""Shared constants for Airtable analysis tools.
+"""Shared constants for AirTable Powertools.
 
 This module contains constants used across multiple modules to ensure
 consistency and avoid magic strings.

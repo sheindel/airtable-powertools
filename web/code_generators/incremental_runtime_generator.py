@@ -803,7 +803,7 @@ def generate_update_function(
     parts.append("                should_compute = True")
     parts.append("            ")
     parts.append("            # Reason 2: One of its dependencies changed")
-    parts.append("            elif any(dep_id in fields_to_compute for dep_id in field_info['dependencies']):")
+    parts.append("            elif any(dep_id in changed_field_ids or dep_id in fields_to_compute for dep_id in field_info['dependencies']):")
     parts.append("                should_compute = True")
     parts.append("            ")
     parts.append("            # Compute if needed")

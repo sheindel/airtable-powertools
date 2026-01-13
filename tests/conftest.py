@@ -4,8 +4,10 @@ import sys
 from pathlib import Path
 from unittest.mock import MagicMock
 
-# Mock PyScript before importing any web modules
+# Mock PyScript and pyodide before importing any web modules
 sys.modules['pyscript'] = MagicMock()
+sys.modules['pyodide'] = MagicMock()
+sys.modules['pyodide.ffi'] = MagicMock()
 
 # Add web directory to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "web"))

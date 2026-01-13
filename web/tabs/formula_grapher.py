@@ -629,6 +629,10 @@ def graph_formula_from_ui(
         mermaid_container.innerHTML = f'<div class="mermaid">{mermaid_code}</div>'
         window.mermaid.run()
         
+        # Enable the mermaid action buttons
+        if hasattr(window, 'enableFormulaGrapherButtons'):
+            window.enableFormulaGrapherButtons()
+        
         print(f"Successfully generated flowchart for {table_name}.{field_name}")
         
     except Exception as e:

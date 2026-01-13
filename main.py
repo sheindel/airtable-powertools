@@ -184,6 +184,7 @@ def get_airtable_metadata(
     verbose: bool = False,
     output_filename: Optional[Path] = None
 ):
+    """Get Airtable metadata for the configured base."""
     # curl "https://api.airtable.com/v0/meta/bases/{baseId}/tables" \
     # -H "Authorization: Bearer YOUR_TOKEN"
 
@@ -583,6 +584,7 @@ def generate_mermaid_graph(
     direction: str = "both",
     max_depth: int = 3
 ):
+    """Generate a Mermaid dependency graph for a field."""
     print("Generating Mermaid Graph")
 
     from rich.traceback import install

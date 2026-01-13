@@ -1,4 +1,4 @@
-"""Main entry point for Airtable Analysis Tools web application
+"""Main entry point for AirTable Powertools web application
 
 This module handles:
 - Tab initialization and routing

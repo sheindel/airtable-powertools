@@ -194,7 +194,7 @@
     <div class="max-w-6xl mx-auto">
         <!-- Header with Theme Toggle -->
         <div class="flex justify-between items-center mb-6">
-            <h1 class="text-3xl font-bold dark:text-white">Airtable Analysis Tools</h1>
+            <h1 class="text-3xl font-bold dark:text-white">AirTable Powertools</h1>
             <at-theme-toggle id="theme-toggle"></at-theme-toggle>
         </div>
 
@@ -376,11 +376,11 @@
                     </button>
                 </div>
                 <div class="flex flex-wrap mt-4 gap-2">
-                    <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150" data-action="download-mermaid-svg">Download SVG</button>
-                    <button class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150" data-action="open-mermaid-live">Open in Mermaid Live</button>
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150" data-action="copy-mermaid">Copy Mermaid Graph Definition</button>
-                    <button class="bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150" data-action="toggle-mermaid-fullscreen">Fullscreen</button>
-                    <button class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150" data-action="download-mermaid-text">Download Mermaid Text</button>
+                    <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed" data-action="download-mermaid-svg" id="download-mermaid-svg-btn" disabled>Download SVG</button>
+                    <button class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed" data-action="open-mermaid-live" id="open-mermaid-live-btn" disabled>Open in Mermaid Live</button>
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed" data-action="copy-mermaid" id="copy-mermaid-btn" disabled>Copy Mermaid Graph Definition</button>
+                    <button class="bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed" data-action="toggle-mermaid-fullscreen" id="toggle-mermaid-fullscreen-btn" disabled>Fullscreen</button>
+                    <button class="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed" data-action="download-mermaid-text" id="download-mermaid-text-btn" disabled>Download Mermaid Text</button>
                 </div>
             </div>
 
@@ -401,37 +401,37 @@
                 
                 <!-- Results Display -->
                 <div id="dependencies-results" class="hidden">
-                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-4">
-                        <div class="flex-1 w-full">
-                            <h4 class="text-md font-semibold dark:text-white mb-2">Dependency Matrix</h4>
-                            <!-- Filter Controls -->
-                            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
-                                <div>
-                                    <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1" for="filter-source-table">Filter Source Table:</label>
-                                    <input type="text" 
-                                           id="filter-source-table" 
-                                           placeholder="Type to filter..."
-                                           class="w-full p-2 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                </div>
-                                <div>
-                                    <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1" for="filter-target-table">Filter Target Table:</label>
-                                    <input type="text" 
-                                           id="filter-target-table" 
-                                           placeholder="Type to filter..."
-                                           class="w-full p-2 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
-                                </div>
-                                <div class="flex items-end">
-                                    <button id="clear-filters-btn"
-                                            class="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-3 rounded-lg shadow-sm hover:shadow transition-all duration-150 text-sm">
-                                        Clear Filters
-                                    </button>
-                                </div>
+                    <div class="mb-4">
+                        <h4 class="text-md font-semibold dark:text-white mb-2">Dependency Matrix</h4>
+                        <!-- Filter Controls -->
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-3">
+                            <div>
+                                <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1" for="filter-source-table">Filter Source Table:</label>
+                                <input type="text" 
+                                       id="filter-source-table" 
+                                       placeholder="Type to filter..."
+                                       class="w-full p-2 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-gray-600 dark:text-gray-400 mb-1" for="filter-target-table">Filter Target Table:</label>
+                                <input type="text" 
+                                       id="filter-target-table" 
+                                       placeholder="Type to filter..."
+                                       class="w-full p-2 text-sm border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white">
+                            </div>
+                            <div class="flex items-end">
+                                <button id="clear-filters-btn"
+                                        class="w-full bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-3 rounded-lg shadow-sm hover:shadow transition-all duration-150 text-sm">
+                                    Clear Filters
+                                </button>
+                            </div>
+                            <div class="flex items-end">
+                                <button class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-3 rounded-lg shadow-sm hover:shadow transition-all duration-150 text-sm" 
+                                    data-action="download-table-dependencies-csv">
+                                    Download CSV
+                                </button>
                             </div>
                         </div>
-                        <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 whitespace-nowrap" 
-                            data-action="download-table-dependencies-csv">
-                            Download CSV
-                        </button>
                     </div>
                     <div id="dependencies-table-container" class="mb-4"></div>
                 </div>
@@ -512,10 +512,10 @@
 
                 <!-- Action Buttons -->
                 <div class="flex flex-wrap mt-4 gap-2">
-                    <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150" data-action="download-grapher-svg">Download SVG</button>
-                    <button class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150" data-action="open-grapher-live">Open in Mermaid Live</button>
-                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150" data-action="copy-grapher-mermaid">Copy Mermaid Definition</button>
-                    <button class="bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150" data-action="toggle-grapher-fullscreen">Fullscreen</button>
+                    <button class="bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed" data-action="download-grapher-svg" id="download-grapher-svg-btn" disabled>Download SVG</button>
+                    <button class="bg-purple-600 hover:bg-purple-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed" data-action="open-grapher-live" id="open-grapher-live-btn" disabled>Open in Mermaid Live</button>
+                    <button class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed" data-action="copy-grapher-mermaid" id="copy-grapher-mermaid-btn" disabled>Copy Mermaid Definition</button>
+                    <button class="bg-primary-600 hover:bg-primary-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed" data-action="toggle-grapher-fullscreen" id="toggle-grapher-fullscreen-btn" disabled>Fullscreen</button>
                 </div>
             </div>
 
@@ -722,8 +722,10 @@
                 
                 <!-- Export Button -->
                 <div class="mt-4 flex gap-2">
-                        <button class="bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150"
-                            data-action="download-scorecard-csv">
+                        <button class="bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed"
+                            data-action="download-scorecard-csv"
+                            id="download-scorecard-csv-btn"
+                            disabled>
                         Download CSV
                     </button>
                 </div>
@@ -827,8 +829,10 @@
                 
                 <!-- Export Button -->
                 <div class="mt-4 flex gap-2">
-                        <button class="bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150"
-                            data-action="download-unused-csv">
+                        <button class="bg-green-600 hover:bg-green-700 dark:bg-green-600 dark:hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed"
+                            data-action="download-unused-csv"
+                            id="download-unused-csv-btn"
+                            disabled>
                         Download CSV
                     </button>
                 </div>
@@ -1043,7 +1047,9 @@
 
                 <!-- Generate Button -->
                 <button onclick="window.generateEvaluatorCode()" 
-                        class="w-full bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white font-semibold py-2.5 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 mb-6">
+                        class="w-full bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white font-semibold py-2.5 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 mb-6 disabled:opacity-60 disabled:cursor-not-allowed"
+                        id="generate-evaluator-btn"
+                        disabled>
                     Generate Evaluator
                 </button>
 
