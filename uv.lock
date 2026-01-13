@@ -2,8 +2,8 @@ version = 1
 requires-python = ">=3.12"
 
 [[package]]
-name = "airtable-mermaid-grapher"
-version = "0.3.6"
+name = "airtable-powertools"
+version = "0.4.0"
 source = { virtual = "." }
 dependencies = [
     { name = "httpx" },

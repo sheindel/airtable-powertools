@@ -447,6 +447,39 @@ class TestRunner:
                 message="web/output.css not found - run 'npm run build:css'"
             )
         self.report.add_result(result)
+        
+        # Run pytest integration tests (without live API)
+        result = self.run_test(
+            name="PyTest Integration Tests (Mock)",
+            phase="Phase 4: Integration",
+            command="uv run pytest tests/test_integration_*.py -v",
+            timeout=120,
+            expected_in_output="passed"
+        )
+        self.report.add_result(result)
+        
+        # Check if Airtable credentials are available for live tests
+        import os
+        has_credentials = bool(os.getenv("AIRTABLE_BASE_ID") and os.getenv("AIRTABLE_API_KEY"))
+        
+        if has_credentials:
+            # Run integration tests with live Airtable API
+            result = self.run_test(
+                name="PyTest Integration Tests (Live API)",
+                phase="Phase 4: Integration",
+                command="uv run pytest tests/test_integration_*.py --airtable-live -v",
+                timeout=180,
+                expected_in_output="passed"
+            )
+            self.report.add_result(result)
+        else:
+            self.report.add_result(TestResult(
+                name="PyTest Integration Tests (Live API)",
+                phase="Phase 4: Integration",
+                status="SKIP",
+                duration=0,
+                message="AIRTABLE_BASE_ID and AIRTABLE_API_KEY not set - set environment variables to run live tests"
+            ))
     
     def run_all_phases(self):
         """Run all test phases"""

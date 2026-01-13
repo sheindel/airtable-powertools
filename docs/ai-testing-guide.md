@@ -2,9 +2,48 @@
 
 This document contains a comprehensive regression test suite designed to be executed by an AI agent. The tests cover unit tests, CLI commands, and web application functionality.
 
+## Quick Start - Automated Test Runner
+
+The fastest way to run the complete regression suite is using the automated test runner:
+
+```bash
+# Run all phases of the regression suite
+uv run python run_regression_tests.py
+
+# Run a specific phase only
+uv run python run_regression_tests.py --phase 1  # Unit tests
+uv run python run_regression_tests.py --phase 2  # CLI tests
+uv run python run_regression_tests.py --phase 4  # Integration tests
+
+# Specify custom output file
+uv run python run_regression_tests.py --output my_report.md
+
+# Run with live Airtable API integration tests
+export AIRTABLE_BASE_ID=appXXXXXXXXXXXXXX
+export AIRTABLE_API_KEY=keyXXXXXXXXXXXXXX
+uv run python run_regression_tests.py
+```
+
+The automated runner:
+- **Phase 1**: Environment setup, builds CSS, runs unit tests with coverage
+- **Phase 2**: CLI command testing (help, formula evaluation, schema generation)
+- **Phase 3**: Web app testing (requires manual Chrome MCP execution)
+- **Phase 4**: Integration tests including pytest integration test suite
+
+Results are saved to `test_report.md` (or custom file) with detailed pass/fail status and timing information.
+
+### Integration Test Coverage
+
+Phase 4 now includes the pytest integration test suite:
+- **Mock tests**: Always run, test integration logic without API calls
+- **Live API tests**: Run when `AIRTABLE_BASE_ID` and `AIRTABLE_API_KEY` are set
+  - Test files: `tests/test_integration_*.py`
+  - See [integration-testing-guide.md](integration-testing-guide.md) for details
+  - Tests formula evaluation, parity checking, CLI functionality with real data
+
 ## Test Execution Overview
 
-This test suite is designed to be executed sequentially by an AI agent. Each section should be completed before moving to the next. The AI should report success/failure for each test and capture any errors encountered.
+This test suite can be executed automatically via `run_regression_tests.py` or manually by following the sections below. Each section should be completed before moving to the next. The AI should report success/failure for each test and capture any errors encountered.
 
 ---
 

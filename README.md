@@ -204,9 +204,25 @@ See [docs/architecture.md](docs/architecture.md) for detailed architecture docum
 The project includes comprehensive test coverage:
 
 - **Unit Tests** - Core business logic (80%+ coverage goal)
-- **Integration Tests** - End-to-end CLI workflows
+- **Integration Tests** - Real Airtable API testing with `--airtable-live` flag
 - **Performance Benchmarks** - Track code generation speed
 - **Web Tests** - Chrome MCP-based browser testing
+- **Automated Regression Suite** - Run all tests with `uv run python run_regression_tests.py`
+
+Quick test commands:
+```bash
+# Run unit tests
+uv run pytest
+
+# Run with integration tests (requires AIRTABLE_BASE_ID and AIRTABLE_API_KEY)
+uv run pytest --airtable-live
+
+# Run automated regression suite
+uv run python run_regression_tests.py
+
+# Run specific phase
+uv run python run_regression_tests.py --phase 4
+```
 
 See [tests/README.md](tests/README.md) for detailed testing documentation.
 
