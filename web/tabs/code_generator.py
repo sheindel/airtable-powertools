@@ -485,11 +485,12 @@ def display_generated_files(files):
         return
     
     # Store files in global state for download
-    # Convert Python dict to JS object
+    # Convert Python dict to JS object using pyodide's to_js method
     import js
-    window.generatedFiles = js.Object.fromEntries(
-        js.Object.entries(files)
-    )
+    from pyodide.ffi import to_js
+    
+    # Convert Python dict to JavaScript object
+    window.generatedFiles = to_js(files, dict_converter=js.Object.fromEntries)
     
     # Build file tree HTML
     html = '<div class="generated-files-container mt-6">'
@@ -596,11 +597,15 @@ def download_generated_file(filename):
     import js
     
     files = window.generatedFiles
-    if not files or filename not in files:
+    # Check if file exists in JS object
+    has_file = js.Object.hasOwn(files, filename) if files else False
+    
+    if not files or not has_file:
         print(f"File not found: {filename}")
         return
     
-    content = files[filename]
+    # Access JS object property using getattr
+    content = getattr(files, filename)
     
     # Create blob and download
     blob = js.Blob.new([content], {"type": "text/plain"})
@@ -625,8 +630,12 @@ def download_all_files():
         print("No files to download")
         return
     
-    for filename, content in files.items():
+    # Convert JavaScript object to Python list of [filename, content] pairs
+    file_entries = list(js.Object.entries(files))
+    
+    for entry in file_entries:
+        filename = str(entry[0])
         # Small delay between downloads to avoid browser blocking
         js.setTimeout(create_once_callable(lambda f=filename: download_generated_file(f)), 100)
     
-    print(f"Downloading {len(files)} files...")
+    print(f"Downloading {len(file_entries)} files...")
