@@ -39,6 +39,7 @@ packages = [
 "./tabs/formula_compressor.py" = "tabs/formula_compressor.py"
 "./tabs/formula_evaluator.py" = "tabs/formula_evaluator.py"
 "./tabs/formula_grapher.py" = "tabs/formula_grapher.py"
+"./tabs/metadata_summary.py" = "tabs/metadata_summary.py"
 "./tabs/postgres_schema.py" = "tabs/postgres_schema.py"
 "./tabs/types_generator.py" = "tabs/types_generator.py"
 "./tabs/unused_fields.py" = "tabs/unused_fields.py"

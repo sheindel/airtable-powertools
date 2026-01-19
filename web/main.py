@@ -19,7 +19,8 @@ from tabs import (
     formula_grapher, 
     formula_compressor, 
     complexity_scorecard, 
-    unused_fields, 
+    unused_fields,
+    metadata_summary, 
     formula_evaluator, 
     postgres_schema, 
     types_generator,
@@ -42,6 +43,7 @@ def initialize_tabs():
     formula_compressor.initialize()
     complexity_scorecard.initialize()
     unused_fields.initialize()
+    metadata_summary.initialize()
     formula_evaluator.initialize()
     postgres_schema.initialize()
     types_generator.initialize()

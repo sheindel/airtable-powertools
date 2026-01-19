@@ -102,5 +102,10 @@ declare global {
     generateFormulaGraph?(tableName: string, fieldName: string): void;
     getFormulaForDisplay?(tableName: string, fieldName: string): string;
     graphFormulaFromUI?(tableName: string, fieldName: string, expandFields?: boolean, maxDepth?: number | null, direction?: string): void;
+    
+    // Metadata Summary Tab (web/tabs/metadata_summary.py)
+    generateMatrixHTML?(): string;
+    exportMatrixCSV?(): string;
+    sortMetadataTable?(column: string): void;
   }
 }

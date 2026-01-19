@@ -248,6 +248,7 @@
                         <option value="formula-compressor">Formula Compressor</option>
                         <option value="complexity-scorecard">Complexity Scorecard</option>
                         <option value="unused-fields">Unused Fields</option>
+                        <option value="metadata-summary">Metadata Summary</option>
                         <option value="formula-evaluator">Formula Evaluator</option>
                         <option value="postgres-schema">PostgreSQL Schema</option>
                         <option value="code-generator">Code Generator</option>
@@ -281,6 +282,10 @@
                         <button class="tab-button px-6 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 whitespace-nowrap" 
                                 data-tab="unused-fields">
                             Unused Fields
+                        </button>
+                        <button class="tab-button px-6 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 whitespace-nowrap" 
+                                data-tab="metadata-summary">
+                            Metadata Summary
                         </button>
                         <button class="tab-button px-6 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 whitespace-nowrap" 
                                 data-tab="formula-evaluator">
@@ -1057,6 +1062,35 @@
                 <div id="evaluator-output" class="mt-6">
                     <div class="text-center py-12 text-gray-500 dark:text-gray-400 italic">
                         Select a table and click "Generate Evaluator" to create code
+                    </div>
+                </div>
+            </div>
+
+            <!-- Metadata Summary Tab -->
+            <div id="metadata-summary-tab" class="tab-content hidden bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-colors duration-200">
+                <h2 class="text-xl font-semibold mb-4 dark:text-white">Metadata Summary</h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">
+                    View a summary matrix of field types across all tables in your base.
+                </p>
+
+                <!-- Generate Button -->
+                <div class="flex gap-4 mb-6">
+                    <button data-action="generate-metadata-summary"
+                            class="bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white font-semibold py-2.5 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150">
+                        Generate Summary
+                    </button>
+                    <button data-action="download-matrix-csv"
+                            id="download-matrix-csv-btn"
+                            class="bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-semibold py-2.5 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed"
+                            disabled>
+                        Download CSV
+                    </button>
+                </div>
+
+                <!-- Output -->
+                <div id="metadata-summary-output" class="mt-6">
+                    <div class="text-center py-12 text-gray-500 dark:text-gray-400 italic">
+                        Click "Generate Summary" to view the field type matrix
                     </div>
                 </div>
             </div>

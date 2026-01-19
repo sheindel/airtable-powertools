@@ -24,6 +24,10 @@ import {
     sortUnusedBy,
     downloadUnusedFieldsCSV,
 } from "./unused.js";
+import {
+    generateMetadataSummary,
+    downloadMetadataCSV,
+} from "./metadata-summary.js";
 
 type ActionHandler = (event?: Event, target?: HTMLElement) => void;
 
@@ -128,6 +132,8 @@ export function buildActionHandlers(fetchSchema: () => void, loadSampleSchema: (
             }
         },
         "download-unused-csv": downloadUnusedFieldsCSV,
+        "generate-metadata-summary": generateMetadataSummary,
+        "download-matrix-csv": downloadMetadataCSV,
     };
 }
 
