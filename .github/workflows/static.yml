@@ -72,13 +72,18 @@ jobs:
             TOOLTIP="Version ${FULL_VERSION} | Built: ${BUILD_TIME}"
           else
             DISPLAY_VERSION="v${DATE_VERSION}"
-            TOOLTIP="Version ${FULL_VERSION} | Commit: ${COMMIT_SHA} | Built: ${BUILD_TIME} | ${COMMIT_MSG}"
+            # Escape special characters in commit message for sed
+            COMMIT_MSG_ESCAPED=$(echo "${COMMIT_MSG}" | sed 's/[&/\|]/\\&/g')
+            TOOLTIP="Version ${FULL_VERSION} | Commit: ${COMMIT_SHA} | Built: ${BUILD_TIME} | ${COMMIT_MSG_ESCAPED}"
           fi
           
           echo "Deploying version: ${FULL_VERSION} (${COMMIT_SHA})"
           
+          # Escape special characters in tooltip for sed
+          TOOLTIP_ESCAPED=$(echo "${TOOLTIP}" | sed 's/[&/\|]/\\&/g')
+          
           # Replace version in index.html with tooltip
-          sed -i "s|<span id=\"app-version\"[^>]*>v[0-9.-]*</span>|<span id=\"app-version\" title=\"${TOOLTIP}\" class=\"cursor-help\">${DISPLAY_VERSION}</span>|g" web/index.html
+          sed -i "s|<span id=\"app-version\"[^>]*>v[0-9.-]*</span>|<span id=\"app-version\" title=\"${TOOLTIP_ESCAPED}\" class=\"cursor-help\">${DISPLAY_VERSION}</span>|g" web/index.html
       
       - name: Setup Pages
         uses: actions/configure-pages@v5
