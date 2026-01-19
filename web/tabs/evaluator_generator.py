@@ -9,7 +9,6 @@ data access mode, null checks, and output format.
 from pyscript import document, window
 from pyodide.ffi import create_proxy
 import sys
-import json
 
 sys.path.append("web")
 

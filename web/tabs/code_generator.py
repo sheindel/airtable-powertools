@@ -11,7 +11,6 @@ This module provides a single interface for generating various types of code fro
 from pyscript import document, window
 from pyodide.ffi import create_proxy, create_once_callable
 import sys
-import json
 
 sys.path.append("web")
 
@@ -21,7 +20,6 @@ from components.code_display import create_code_block
 from components.async_operations import defer_execution, ProgressTracker
 from code_generators.workflows import (
     create_workflow,
-    WORKFLOWS,
     DEFAULT_OPTIONS,
 )
 

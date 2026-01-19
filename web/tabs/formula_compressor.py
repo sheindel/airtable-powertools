@@ -7,7 +7,6 @@ import sys
 sys.path.append("web")
 from components.airtable_client import get_local_storage_metadata, find_field_by_id
 from components.async_operations import defer_execution
-from components.loading import show_loading, hide_loading
 
 
 def compress_formula(

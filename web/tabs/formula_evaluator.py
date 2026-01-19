@@ -6,7 +6,13 @@ import sys
 sys.path.append("web")
 from components.airtable_client import get_local_storage_metadata
 from at_metadata_graph import metadata_to_graph
-from airtable_formula_evaluator import evaluate_formula, substitute_field_values, get_unresolved_fields, simplify_formula, FormulaEvaluationError
+from airtable_formula_evaluator import (
+    evaluate_formula, 
+    substitute_field_values, 
+    get_unresolved_fields, 
+    simplify_formula, 
+    FormulaEvaluationError
+)
 
 
 def _convert_field_references(

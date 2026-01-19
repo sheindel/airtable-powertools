@@ -1,6 +1,6 @@
 """Table Dependencies Tab - Analyze table-to-table dependencies and relationships"""
 try:
-    from pyscript import document, window
+    from pyscript import window
     _HAS_PYSCRIPT = True
 except ImportError:
     _HAS_PYSCRIPT = False

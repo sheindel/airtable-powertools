@@ -8,8 +8,6 @@ sys.path.append("web")
 from components.airtable_client import get_local_storage_metadata
 from components.error_handling import handle_tab_error, validate_metadata, AnalysisError
 from types_generator import (
-    generate_typescript_types,
-    generate_python_types,
     generate_all_typescript_files,
     generate_all_python_files,
 )
