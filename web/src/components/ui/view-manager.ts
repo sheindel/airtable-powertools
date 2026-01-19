@@ -153,7 +153,7 @@ export class AtViewManager extends HTMLElement implements AtViewManagerElement {
     this.dispatchEvent(
       new CustomEvent<TabChangeEventDetail>("tab-change", {
         bubbles: true,
-        detail: { tab: tabName, previous },
+        detail: { tab: tabName, previous: previous ?? undefined },
       })
     );
   }
