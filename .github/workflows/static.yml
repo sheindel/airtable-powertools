@@ -50,7 +50,7 @@ jobs:
         with:
           python-version: '3.12'
       
-      - name: Install tomli for version reading
+      - name: Install dependencies for PyScript config generation
         run: pip install tomli tomli-w
       
       - name: Generate PyScript configuration
@@ -58,21 +58,27 @@ jobs:
       
       - name: Inject version into HTML
         run: |
-          # Read version from pyproject.toml and get git info
-          VERSION=$(python3 -c "import tomli; f=open('pyproject.toml','rb'); print(tomli.load(f)['project']['version'])")
+          # Generate date-based version with build index (YYYY.MM.DD.HHMM format)
+          DATE_VERSION=$(date -u +%Y.%m.%d)
+          BUILD_INDEX=$(date -u +%H%M)
+          FULL_VERSION="${DATE_VERSION}.${BUILD_INDEX}"
           COMMIT_SHA=$(git rev-parse --short HEAD)
+          COMMIT_MSG=$(git log -1 --pretty=%B | head -n 1)
+          BUILD_TIME=$(date -u +"%Y-%m-%d %H:%M:%S UTC")
           
           # Check if this is a tagged release
           if git describe --exact-match --tags HEAD 2>/dev/null; then
-            VERSION_STRING="v${VERSION}"
+            DISPLAY_VERSION="v${DATE_VERSION}"
+            TOOLTIP="Version ${FULL_VERSION} | Built: ${BUILD_TIME}"
           else
-            VERSION_STRING="v${VERSION}-${COMMIT_SHA}"
+            DISPLAY_VERSION="v${DATE_VERSION}"
+            TOOLTIP="Version ${FULL_VERSION} | Commit: ${COMMIT_SHA} | Built: ${BUILD_TIME} | ${COMMIT_MSG}"
           fi
           
-          echo "Deploying version: $VERSION_STRING"
+          echo "Deploying version: ${FULL_VERSION} (${COMMIT_SHA})"
           
-          # Replace version in index.html
-          sed -i "s|<span id=\"app-version\">v0.1.0</span>|<span id=\"app-version\">${VERSION_STRING}</span>|g" web/index.html
+          # Replace version in index.html with tooltip
+          sed -i "s|<span id=\"app-version\"[^>]*>v[0-9.-]*</span>|<span id=\"app-version\" title=\"${TOOLTIP}\" class=\"cursor-help\">${DISPLAY_VERSION}</span>|g" web/index.html
       
       - name: Setup Pages
         uses: actions/configure-pages@v5

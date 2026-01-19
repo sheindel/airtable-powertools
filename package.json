@@ -1,6 +1,6 @@
 {
   "name": "airtable-analysis-tools",
-  "version": "0.3.0",
+  "version": "2026.01.18",
   "description": "Airtable base analysis and visualization tools",
   "scripts": {
     "build:css": "tailwindcss -i ./web/input.css -o ./web/output.css --minify",
