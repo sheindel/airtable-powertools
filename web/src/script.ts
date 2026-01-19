@@ -25,6 +25,8 @@ import {
     onGrapherFieldSelected,
     autoGenerateFormulaGraph
 } from './modules/grapher.js';
+import { initializeScorecardDropdowns } from './modules/scorecard.js';
+import { initializeUnusedDropdowns } from './modules/unused.js';
 import { wireActions } from './modules/ui-events.js';
 import { buildActionHandlers, changeHandlers } from './modules/action-handlers.js';
 import type { DropdownOption, SchemaPayload } from './types/pyscript';
@@ -96,6 +98,17 @@ document.addEventListener("DOMContentLoaded", () => {
     const actionHandlers = buildActionHandlers(fetchSchemaAndUpdateUI, loadSampleSchema);
     wireActions(actionHandlers, changeHandlers);
 
+    // Listen for tab changes so modules can initialize lazily (and to support route navigation)
+    document.addEventListener('tab-change', (event: Event) => {
+        const tabName = (event as CustomEvent<any>).detail?.tab;
+        if (!tabName) return;
+        if (tabName === 'complexity-scorecard') {
+            initializeScorecardDropdowns();
+        } else if (tabName === 'unused-fields') {
+            initializeUnusedDropdowns();
+        }
+    });
+
     // Set up event listeners for accordion and action buttons
     const fetchBtn = document.getElementById("fetch-schema");
     if (fetchBtn) {
@@ -105,6 +118,33 @@ document.addEventListener("DOMContentLoaded", () => {
     const loadSampleBtn = document.getElementById("load-sample");
     if (loadSampleBtn) {
         loadSampleBtn.addEventListener("click", loadSampleSchema);
+    }
+
+    // Upload JSON Schema button wiring (modal)
+    const uploadBtn = document.getElementById('upload-json-schema-btn');
+    if (uploadBtn) {
+        uploadBtn.addEventListener('click', () => {
+            const input = document.getElementById('schema-file-input') as HTMLInputElement | null;
+            input?.click();
+        });
+    }
+
+    const schemaFileInput = document.getElementById('schema-file-input') as HTMLInputElement | null;
+    if (schemaFileInput) {
+        schemaFileInput.addEventListener('change', async () => {
+            const file = schemaFileInput.files?.[0] ?? null;
+            await processUploadedSchemaFile(file);
+            // Reset input so the same file can be chosen again later
+            schemaFileInput.value = '';
+        });
+    }
+
+    // Download currently loaded schema
+    const downloadBtn = document.getElementById('download-schema-btn') as HTMLButtonElement | null;
+    if (downloadBtn) {
+        downloadBtn.addEventListener('click', () => {
+            downloadSchema();
+        });
     }
 
     // Wait for PyScript to be ready before wiring dropdowns
@@ -477,6 +517,65 @@ async function loadSampleSchema(): Promise<void> {
     }
 }
 
+
+/**
+ * Process an uploaded JSON schema file
+ */
+async function processUploadedSchemaFile(file: File | null): Promise<void> {
+    if (!file) return;
+    try {
+        const text = await file.text();
+        const parsed = JSON.parse(text) as AirtableSchema;
+        if (!parsed || !Array.isArray((parsed as any).tables)) {
+            toast.error('Uploaded file does not look like a valid Airtable schema (missing tables).');
+            return;
+        }
+        saveSchema(parsed);
+        // Update UI and close modal
+        const schemaData = getSchema();
+        updateUIBasedOnSchema(true, schemaData);
+        updateSchemaInfo();
+        const modal = document.getElementById('api-help-modal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+        toast.success('Schema uploaded successfully!');
+    } catch (error) {
+        console.error('Error processing uploaded schema:', error);
+        toast.error('Failed to parse or save schema. Ensure you uploaded a valid JSON schema file.');
+    }
+}
+
+/**
+ * Download the currently stored schema as a JSON file
+ */
+function downloadSchema(): void {
+    const payload = getSchema();
+    if (!payload || !payload.schema) {
+        toast.warning('No schema is currently loaded.');
+        return;
+    }
+
+    try {
+        const data = JSON.stringify(payload.schema, null, 2);
+        const blob = new Blob([data], { type: 'application/json' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const ts = payload.timestamp ? payload.timestamp.replace(/[:.]/g, '-') : new Date().toISOString().replace(/[:.]/g, '-');
+        a.href = url;
+        a.download = `airtable_schema_${ts}.json`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+        toast.success('Schema download started.');
+    } catch (error) {
+        console.error('Error downloading schema:', error);
+        toast.error('Failed to create schema download.');
+    }
+}
+
 function updateSchemaInfo(): void {
     const schemaData = getSchema();
     const tables = schemaData?.schema?.tables || [];
@@ -513,6 +612,20 @@ function updateSchemaInfo(): void {
     const tableDepsBtn = document.getElementById("generate-table-dependencies-btn") as HTMLButtonElement | null;
     if (tableDepsBtn && tables.length > 0) {
         tableDepsBtn.disabled = false;
+    }
+
+    // Show or hide the Download Schema button depending on whether a schema is loaded
+    const downloadBtn = document.getElementById("download-schema-btn") as HTMLButtonElement | null;
+    if (downloadBtn) {
+        if (tables.length > 0) {
+            downloadBtn.classList.remove('hidden');
+            downloadBtn.disabled = false;
+            downloadBtn.setAttribute('aria-hidden', 'false');
+        } else {
+            downloadBtn.classList.add('hidden');
+            downloadBtn.disabled = true;
+            downloadBtn.setAttribute('aria-hidden', 'true');
+        }
     }
 }
 

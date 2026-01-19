@@ -229,86 +229,72 @@
                 <div class="space-y-3">
                     <button class="w-full bg-primary-600 hover:bg-primary-700 active:bg-primary-800 text-white font-semibold py-2.5 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed" data-action="fetch-schema">Load Base Schema With API Key</button>
                     <button class="w-full bg-gray-600 hover:bg-gray-700 active:bg-gray-800 text-white font-semibold py-2.5 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150" data-action="show-api-help-modal">I don't have an API Key</button>
+                    <button id="download-schema-btn" class="hidden w-full bg-indigo-600 hover:bg-indigo-700 active:bg-indigo-800 text-white font-semibold py-2.5 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 disabled:opacity-60 disabled:cursor-not-allowed" disabled aria-hidden="true">
+                        Download Current Schema
+                    </button>
                 </div>
                 <p class="mt-2 text-gray-600 dark:text-gray-400 text-sm cursor-help" id="last-refresh">Last Refresh: Not yet retrieved</p>
             </div>
         </div>
 
         <at-tab-manager active="dependency-mapper" id="tab-manager">
-            <!-- Tab Navigation -->
-            <div id="tab-navigation" class="bg-white dark:bg-gray-800 rounded-lg shadow-md mb-6 transition-colors duration-200 hidden">
-                <!-- Mobile Dropdown (visible on small screens) -->
-                <div class="md:hidden p-4">
-                    <label class="block mb-2 text-sm font-medium dark:text-gray-200" for="mobile-tab-selector">Select Tool:</label>
-                    <select id="mobile-tab-selector" 
-                            class="w-full p-2.5 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white text-base">
-                        <option value="dependency-mapper">Dependency Mapper</option>
-                        <option value="dependency-analysis">Table Dependencies</option>
-                        <option value="formula-grapher">Formula Grapher</option>
-                        <option value="formula-compressor">Formula Compressor</option>
-                        <option value="complexity-scorecard">Complexity Scorecard</option>
-                        <option value="unused-fields">Unused Fields</option>
-                        <option value="metadata-summary">Metadata Summary</option>
-                        <option value="formula-evaluator">Formula Evaluator</option>
-                        <option value="postgres-schema">PostgreSQL Schema</option>
-                        <option value="code-generator">Code Generator</option>
-                        <option value="evaluator-generator">Evaluator Generator</option>
-                    </select>
-                </div>
-                
-                <!-- Desktop Tabs (hidden on small screens) -->
-                <div class="border-b border-gray-200 dark:border-gray-700 hidden md:block">
-                    <nav class="flex -mb-px overflow-x-auto">
-                        <button class="tab-button active px-6 py-3 text-sm font-medium border-b-2 border-blue-500 text-blue-600 dark:text-blue-400 dark:border-blue-400 whitespace-nowrap" 
-                                data-tab="dependency-mapper">
-                            Dependency Mapper
-                        </button>
-                        <button class="tab-button px-6 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 whitespace-nowrap" 
-                                data-tab="dependency-analysis">
-                            Table Dependencies
-                        </button>
-                        <button class="tab-button px-6 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 whitespace-nowrap" 
-                                data-tab="formula-grapher">
-                            Formula Grapher
-                        </button>
-                        <button class="tab-button px-6 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 whitespace-nowrap" 
-                                data-tab="formula-compressor">
-                            Formula Compressor
-                        </button>
-                        <button class="tab-button px-6 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 whitespace-nowrap" 
-                                data-tab="complexity-scorecard">
-                            Complexity Scorecard
-                        </button>
-                        <button class="tab-button px-6 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 whitespace-nowrap" 
-                                data-tab="unused-fields">
-                            Unused Fields
-                        </button>
-                        <button class="tab-button px-6 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 whitespace-nowrap" 
-                                data-tab="metadata-summary">
-                            Metadata Summary
-                        </button>
-                        <button class="tab-button px-6 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 whitespace-nowrap" 
-                                data-tab="formula-evaluator">
-                            Formula Evaluator
-                        </button>
-                        <button class="tab-button px-6 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 whitespace-nowrap" 
-                                data-tab="postgres-schema">
-                            PostgreSQL Schema
-                        </button>
-                        <button class="tab-button px-6 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 whitespace-nowrap" 
-                                data-tab="code-generator">
-                            Code Generator
-                        </button>
-                        <button class="tab-button px-6 py-3 text-sm font-medium border-b-2 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:border-gray-300 dark:hover:border-gray-600 whitespace-nowrap" 
-                                data-tab="evaluator-generator">
-                            Evaluator Generator
-                        </button>
-                    </nav>
-                </div>
-            </div>
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+                <!-- Navigation (left column on md+) -->
+                <div id="tab-navigation" class="md:col-span-3 bg-white dark:bg-gray-800 rounded-lg shadow-md mb-6 transition-colors duration-200 hidden">
+                    <!-- Mobile Dropdown (visible on small screens) -->
+                    <div class="md:hidden p-4">
+                        <label class="block mb-2 text-sm font-medium dark:text-gray-200" for="mobile-tab-selector">Select Tool:</label>
+                        <select id="mobile-tab-selector" 
+                                class="w-full p-2.5 border rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white text-base">
+                            <option value="dependency-mapper">Dependency Mapper</option>
+                            <option value="dependency-analysis">Table Dependencies</option>
+                            <option value="formula-grapher">Formula Grapher</option>
+                            <option value="formula-compressor">Formula Compressor</option>
+                            <option value="complexity-scorecard">Complexity Scorecard</option>
+                            <option value="unused-fields">Unused Fields</option>
+                            <option value="metadata-summary">Metadata Summary</option>
+                            <option value="formula-evaluator">Formula Evaluator</option>
+                            <option value="postgres-schema">PostgreSQL Schema</option>
+                            <option value="code-generator">Code Generator</option>
+                            <option value="evaluator-generator">Evaluator Generator</option>
+                            <option value="about">About</option>
+                        </select>
+                    </div>
 
-            <!-- Tab Content Container -->
-            <div id="tab-content" class="hidden">
+                    <!-- Desktop Sidebar (stacked buttons) -->
+                    <div class="hidden md:flex md:flex-col p-4 border-r border-gray-200 dark:border-gray-700 h-full overflow-y-auto">
+                        <nav class="flex flex-col space-y-1">
+                            <button class="tab-button active px-4 py-3 text-sm font-medium text-left w-full border-l-4 border-transparent text-blue-600 dark:text-blue-400" 
+                                    data-tab="dependency-mapper">Dependency Mapper</button>
+                            <button class="tab-button px-4 py-3 text-sm font-medium text-left w-full border-l-4 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" 
+                                    data-tab="dependency-analysis">Table Dependencies</button>
+                            <button class="tab-button px-4 py-3 text-sm font-medium text-left w-full border-l-4 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" 
+                                    data-tab="formula-grapher">Formula Grapher</button>
+                            <button class="tab-button px-4 py-3 text-sm font-medium text-left w-full border-l-4 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" 
+                                    data-tab="formula-compressor">Formula Compressor</button>
+                            <button class="tab-button px-4 py-3 text-sm font-medium text-left w-full border-l-4 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" 
+                                    data-tab="complexity-scorecard">Complexity Scorecard</button>
+                            <button class="tab-button px-4 py-3 text-sm font-medium text-left w-full border-l-4 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" 
+                                    data-tab="unused-fields">Unused Fields</button>
+                            <button class="tab-button px-4 py-3 text-sm font-medium text-left w-full border-l-4 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" 
+                                    data-tab="metadata-summary">Metadata Summary</button>
+                            <button class="tab-button px-4 py-3 text-sm font-medium text-left w-full border-l-4 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" 
+                                    data-tab="formula-evaluator">Formula Evaluator</button>
+                            <button class="tab-button px-4 py-3 text-sm font-medium text-left w-full border-l-4 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" 
+                                    data-tab="postgres-schema">PostgreSQL Schema</button>
+                            <button class="tab-button px-4 py-3 text-sm font-medium text-left w-full border-l-4 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" 
+                                    data-tab="code-generator">Code Generator</button>
+                            <button class="tab-button px-4 py-3 text-sm font-medium text-left w-full border-l-4 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" 
+                                    data-tab="evaluator-generator">Evaluator Generator</button>
+                            <button class="tab-button px-4 py-3 text-sm font-medium text-left w-full border-l-4 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" 
+                                    data-tab="about">About</button>
+                        </nav>
+                    </div>
+                </div>
+
+                <!-- Content (right column) -->
+                <div id="tab-content" class="md:col-span-9 hidden">
+                    <div id="about-tab" class="tab-content hidden bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-colors duration-200"></div>
             <!-- Dependency Mapper Tab (existing functionality) -->
             <div id="dependency-mapper-tab" class="tab-content active bg-white dark:bg-gray-800 p-6 rounded-lg shadow-md transition-colors duration-200">
 
@@ -1235,9 +1221,15 @@
                     <p class="text-gray-700 dark:text-gray-300 mb-4">
                         No problem! You can try out the tool with our sample data to see how it works.
                     </p>
-                    <button class="w-full bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-semibold py-3 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150" data-action="load-sample-schema-from-modal">
+                    <button class="w-full bg-green-600 hover:bg-green-700 active:bg-green-800 text-white font-semibold py-3 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150 mb-3" data-action="load-sample-schema-from-modal">
                         Load Sample Schema
                     </button>
+                    <button id="upload-json-schema-btn" class="w-full bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold py-3 px-4 rounded-lg shadow-sm hover:shadow transition-all duration-150" title="Upload a JSON schema file to use with the tool">
+                        Upload JSON Schema
+                    </button>
+                    <!-- Hidden file input used for uploading schema JSON -->
+                    <input type="file" id="schema-file-input" accept=".json,application/json" style="display:none" aria-hidden="true" />
+                    <p class="text-sm text-gray-600 dark:text-gray-400 mt-2">Upload a JSON file matching the sample schema format (must include a top-level <code>tables</code> array).</p>
                 </div>
             </div>
         </div>

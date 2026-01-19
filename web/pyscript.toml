@@ -43,5 +43,6 @@ packages = [
 "./tabs/postgres_schema.py" = "tabs/postgres_schema.py"
 "./tabs/types_generator.py" = "tabs/types_generator.py"
 "./tabs/unused_fields.py" = "tabs/unused_fields.py"
+"./tabs/about.py" = "tabs/about.py"
 "./types_generator.py" = "types_generator.py"
 "./typescript_helpers_generator.py" = "typescript_helpers_generator.py"

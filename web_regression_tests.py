@@ -102,6 +102,44 @@ class WebTestSuite:
                 }
             ]
         }
+
+    def test_direct_link_to_tool(self) -> Dict[str, Any]:
+        """
+        Test: Direct link to a specific tool using URL hash (virtual URL)
+
+        Steps:
+        1. Navigate to URL with hash `#/formula-grapher`
+        2. Wait for app to render
+        3. Verify the `tab-manager` reports the active tab and the tab content is visible
+        """
+        return {
+            "test_name": "Direct Link to Tool via URL",
+            "tab_name": "Formula Grapher",
+            "steps": [
+                {
+                    "action": "navigate_page",
+                    "params": {"url": f"{self.base_url}/#/formula-grapher"},
+                    "expected": "Page loads with hash"
+                },
+                {
+                    "action": "wait",
+                    "params": {"duration": 2},
+                    "expected": "UI updates"
+                },
+                {
+                    "action": "evaluate_script",
+                    "params": {
+                        "function": """() => {
+                            const manager = document.getElementById('tab-manager');
+                            const active = manager && typeof manager.getActive === 'function' ? manager.getActive() : (document.querySelector('.tab-button.active')?.dataset.tab || null);
+                            const heading = document.querySelector('#formula-grapher-tab h2')?.textContent || '';
+                            return { active, heading };
+                        }"""
+                    },
+                    "expected": {"active": "formula-grapher", "heading": lambda x: x and len(x) > 0}
+                }
+            ]
+        }
     
     # =========================================================================
     # Test: Load Sample Data

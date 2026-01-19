@@ -25,7 +25,8 @@ from tabs import (
     postgres_schema, 
     types_generator,
     code_generator,
-    evaluator_generator
+    evaluator_generator,
+    about
 )
 
 # Store current active tab
@@ -48,8 +49,10 @@ def initialize_tabs():
     postgres_schema.initialize()
     types_generator.initialize()
     code_generator.initialize()
+
     evaluator_generator.initialize()  # NEW: Initialize evaluator generator tab
-    
+    about.initialize()  # Initialize About tab
+
     print("All tabs initialized")
 
 

@@ -6,6 +6,10 @@ This guide contains detailed test procedures for AI execution using Chrome MCP.
 1. Web server running at http://localhost:8008
 2. Chrome MCP server activated and connected
 3. Sample data file (demo_base_schema.json) available
+4. For direct linking to specific tools you can use the virtual URL format (hash or query param):
+   - Hash: `#/formula-grapher` (example: `http://localhost:8008/#/formula-grapher`)
+   - Query param: `?tab=formula-grapher` (example: `http://localhost:8008/?tab=formula-grapher`)
+   These will open the app with the requested tool active.
 
 ## Test Suite Overview
 
