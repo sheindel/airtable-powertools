@@ -35,9 +35,11 @@ let scorecardSortAsc = false;
  */
 export function initializeScorecardDropdowns(): void {
     const tableFilter = document.getElementById("scorecard-table-filter") as HTMLSelectElement | null;
+    const typeFilter = document.getElementById("scorecard-type-filter") as HTMLSelectElement | null;
     if (!tableFilter) return;
 
     tableFilter.innerHTML = '<option value="">All Tables</option>';
+    if (typeFilter) typeFilter.innerHTML = '<option value="">All Types</option>';
 
     const schemaData = getSchema();
     const tableNames = schemaData?.schema?.tables?.map((t) => t.name).sort() || [];
@@ -47,6 +49,24 @@ export function initializeScorecardDropdowns(): void {
         option.textContent = name;
         tableFilter.appendChild(option);
     });
+
+    // Populate Type dropdown from schema field types
+    if (typeFilter) {
+        const typeSet = new Set<string>();
+        (schemaData?.schema?.tables || []).forEach((t) => {
+            (t.fields || []).forEach((f: any) => {
+                if (f.type) typeSet.add(f.type);
+            });
+        });
+
+        const types = Array.from(typeSet).sort();
+        types.forEach((tname) => {
+            const opt = document.createElement("option");
+            opt.value = tname;
+            opt.textContent = tname;
+            typeFilter.appendChild(opt);
+        });
+    }
 }
 
 /**
@@ -81,7 +101,9 @@ export function refreshComplexityScorecard(): void {
     setTimeout(() => {
         if (typeof window.getComplexityScorecardData !== "undefined") {
             try {
-                const jsonData = window.getComplexityScorecardData(filterTable || null, minScore);
+                const typeFilterEl = document.getElementById("scorecard-type-filter") as HTMLSelectElement | null;
+                const filterType = typeFilterEl ? typeFilterEl.value : "";
+                const jsonData = window.getComplexityScorecardData(filterTable || null, minScore, filterType || null);
                 scorecardData = JSON.parse(jsonData) as ScorecardField[];
 
                 updateComplexitySummary();

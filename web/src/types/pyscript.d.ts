@@ -83,7 +83,7 @@ declare global {
     
     // Complexity Scorecard Tab (web/tabs/complexity_scorecard.py)
     generateComplexityScorecard?(): void;
-    getComplexityScorecardData?(filterTable?: string | null, minScore?: number): any;
+    getComplexityScorecardData?(filterTable?: string | null, minScore?: number, filterType?: string | null): any;
     exportComplexityCSV?(): string;
     getComplexitySummary?(): any;
     

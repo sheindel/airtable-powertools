@@ -134,25 +134,29 @@
 
         .sort-indicator {
             position: absolute;
-            right: 4px;
+            right: 8px;
             top: 50%;
             transform: translateY(-50%);
-            opacity: 0.5;
+            opacity: 0.6;
+            font-size: 0.95em;
+            line-height: 1;
         }
 
         .sortable-header.sorted-asc .sort-indicator::after {
             content: '▲';
             opacity: 1;
+            font-size: 0.95em;
         }
 
         .sortable-header.sorted-desc .sort-indicator::after {
             content: '▼';
             opacity: 1;
+            font-size: 0.95em;
         }
 
         .sortable-header:not(.sorted-asc):not(.sorted-desc) .sort-indicator::after {
             content: '▲▼';
-            font-size: 0.6em;
+            font-size: 0.95em;
             line-height: 1;
         }
     </style>
@@ -289,6 +293,10 @@
                             <button class="tab-button px-4 py-3 text-sm font-medium text-left w-full border-l-4 border-transparent text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200" 
                                     data-tab="about">About</button>
                         </nav>
+                        <!-- App version moved here to sit at the bottom of the sidebar -->
+                        <div class="mt-auto pt-4 border-t border-gray-200 dark:border-gray-700 text-center">
+                            <span id="app-version" title="Version 2026.01.18.0000 | Development Build" class="text-xs text-gray-500 dark:text-gray-400">v2026.01.18</span>
+                        </div>
                     </div>
                 </div>
 
@@ -646,11 +654,17 @@
                         Filters
                     </h3>
                     
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
                         <div>
                             <label class="block mb-2 text-sm font-medium dark:text-gray-200" for="scorecard-table-filter">Filter by Table:</label>
                             <select class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" id="scorecard-table-filter" data-change-action="scorecard-filter">
                                 <option value="">All Tables</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block mb-2 text-sm font-medium dark:text-gray-200" for="scorecard-type-filter">Filter by Type:</label>
+                            <select class="w-full p-2 border rounded dark:bg-gray-700 dark:border-gray-600 dark:text-white" id="scorecard-type-filter" data-change-action="scorecard-filter">
+                                <option value="">All Types</option>
                             </select>
                         </div>
                         <div>
@@ -678,26 +692,26 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-300">
                             <tr>
                                 <th scope="col" class="px-4 py-3 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600" data-action="sort-scorecard" data-field="complexity_score">
-                                    Score ↕
+                                    Score <span class="ml-2 text-base align-middle">↕</span>
                                 </th>
                                 <th scope="col" class="px-4 py-3 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600" data-action="sort-scorecard" data-field="table_name">
-                                    Table ↕
+                                    Table <span class="ml-2 text-base align-middle">↕</span>
                                 </th>
                                 <th scope="col" class="px-4 py-3 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600" data-action="sort-scorecard" data-field="field_name">
-                                    Field ↕
+                                    Field <span class="ml-2 text-base align-middle">↕</span>
                                 </th>
                                 <th scope="col" class="px-4 py-3">Type</th>
                                 <th scope="col" class="px-4 py-3 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600" data-action="sort-scorecard" data-field="max_depth">
-                                    Depth ↕
+                                    Depth <span class="ml-2 text-base align-middle">↕</span>
                                 </th>
                                 <th scope="col" class="px-4 py-3 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600" data-action="sort-scorecard" data-field="backward_deps">
-                                    ← Deps ↕
+                                    ← Deps <span class="ml-2 text-base align-middle">↕</span>
                                 </th>
                                 <th scope="col" class="px-4 py-3 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600" data-action="sort-scorecard" data-field="forward_deps">
-                                    → Deps ↕
+                                    → Deps <span class="ml-2 text-base align-middle">↕</span>
                                 </th>
                                 <th scope="col" class="px-4 py-3 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600" data-action="sort-scorecard" data-field="cross_table_deps">
-                                    X-Table ↕
+                                    X-Table <span class="ml-2 text-base align-middle">↕</span>
                                 </th>
                             </tr>
                         </thead>
@@ -784,16 +798,16 @@
                         <thead class="text-xs text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-300">
                             <tr>
                                 <th scope="col" class="px-4 py-3 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600" data-action="sort-unused" data-field="table_name">
-                                    Table ↕
+                                    Table <span class="ml-2 text-base align-middle">↕</span>
                                 </th>
                                 <th scope="col" class="px-4 py-3 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600" data-action="sort-unused" data-field="field_name">
-                                    Field ↕
+                                    Field <span class="ml-2 text-base align-middle">↕</span>
                                 </th>
                                 <th scope="col" class="px-4 py-3 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600" data-action="sort-unused" data-field="field_type">
-                                    Type ↕
+                                    Type <span class="ml-2 text-base align-middle">↕</span>
                                 </th>
                                 <th scope="col" class="px-4 py-3 cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-600" data-action="sort-unused" data-field="outbound_count">
-                                    Outbound Refs ↕
+                                    Outbound Refs <span class="ml-2 text-base align-middle">↕</span>
                                 </th>
                                 <th scope="col" class="px-4 py-3">Status</th>
                             </tr>
@@ -1168,7 +1182,6 @@
         <!-- Footer -->
         <footer class="mt-8 pt-6 border-t border-gray-200 dark:border-gray-700">
             <div class="flex flex-wrap justify-center items-center gap-4 text-sm text-gray-500 dark:text-gray-400">
-                <span id="app-version" title="Version 2026.01.18.0000 | Development Build" class="cursor-help border-b border-dotted border-gray-400 dark:border-gray-500">v2026.01.18</span>
                 <!-- Future: GitHub link and buy me a coffee -->
             </div>
         </footer>

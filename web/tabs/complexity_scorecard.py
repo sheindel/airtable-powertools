@@ -298,12 +298,13 @@ def get_complexity_summary() -> str:
     })
 
 
-def get_complexity_scorecard_data(filter_table: str = None, min_score: float = 0) -> str:
+def get_complexity_scorecard_data(filter_table: str = None, min_score: float = 0, filter_type: str = None) -> str:
     """Get complexity data formatted for the UI scorecard.
     
     Args:
         filter_table: Optional table name to filter by
         min_score: Minimum complexity score to include (default 0)
+        filter_type: Optional field type to include (e.g., 'formula')
         
     Returns:
         JSON string of field complexity data for display
@@ -313,6 +314,9 @@ def get_complexity_scorecard_data(filter_table: str = None, min_score: float = 0
     # Apply filters
     if filter_table:
         all_complexity = [f for f in all_complexity if f["table_name"] == filter_table]
+
+    if filter_type:
+        all_complexity = [f for f in all_complexity if f.get("field_type") == filter_type]
     
     if min_score > 0:
         all_complexity = [f for f in all_complexity if f["complexity_score"] >= min_score]

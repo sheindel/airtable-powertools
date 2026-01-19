@@ -84,14 +84,14 @@ def generate_matrix_html():
         '<tr>',
         '<th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider sticky left-0 bg-gray-50 dark:bg-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" data-column="table" onclick="sortMetadataTable(\'table\')" title="Click to sort">',
         'Table ',
-        '<span class="sort-indicator" data-col="table">⇅</span>',
+        '<span class="sort-indicator ml-2 text-base" data-col="table">⇅</span>',
         '</th>'
     ]
     
     # Add column headers for each field type (sortable)
     for idx, field_type in enumerate(headers):
         html_parts.append(
-            f'<th class="px-4 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" data-column="{field_type}" onclick="sortMetadataTable(\'{field_type}\')" title="Click to sort">{field_type} <span class="sort-indicator" data-col="{field_type}">⇅</span></th>'
+            f'<th class="px-4 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" data-column="{field_type}" onclick="sortMetadataTable(\'{field_type}\')" title="Click to sort">{field_type} <span class="sort-indicator ml-2 text-base" data-col="{field_type}">⇅</span></th>'
         )
     
     html_parts.extend([
@@ -149,17 +149,17 @@ def generate_matrix_html():
         # Add footer with repeated column headers
         '<tfoot class="bg-gray-50 dark:bg-gray-800">',
         '<tr>',
-        '<th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider sticky left-0 bg-gray-50 dark:bg-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" data-column="table" onclick="sortMetadataTable(\'table\')" title="Click to sort">Table <span class="sort-indicator" data-col="table">⇅</span></th>'
+        '<th class="px-4 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider sticky left-0 bg-gray-50 dark:bg-gray-800 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" data-column="table" onclick="sortMetadataTable(\'table\')" title="Click to sort">Table <span class="sort-indicator ml-2 text-base" data-col="table">⇅</span></th>'
     ])
     
     # Repeat field type headers in footer
     for field_type in headers:
         html_parts.append(
-            f'<th class="px-4 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" data-column="{field_type}" onclick="sortMetadataTable(\'{field_type}\')" title="Click to sort">{field_type} <span class="sort-indicator" data-col="{field_type}">⇅</span></th>'
+            f'<th class="px-4 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" data-column="{field_type}" onclick="sortMetadataTable(\'{field_type}\')" title="Click to sort">{field_type} <span class="sort-indicator ml-2 text-base" data-col="{field_type}">⇅</span></th>'
         )
     
     html_parts.extend([
-        '<th class="px-4 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" data-column="total" onclick="sortMetadataTable(\'total\')" title="Click to sort">Total <span class="sort-indicator" data-col="total">⇅</span></th>',
+        '<th class="px-4 py-3 text-center text-xs font-medium text-gray-500 dark:text-gray-400 uppercase tracking-wider cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-700 select-none" data-column="total" onclick="sortMetadataTable(\'total\')" title="Click to sort">Total <span class="sort-indicator ml-2 text-base" data-col="total">⇅</span></th>',
         '</tr>',
         '</tfoot>',
         '</table>',
