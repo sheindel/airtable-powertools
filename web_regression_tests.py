@@ -110,7 +110,7 @@ class WebTestSuite:
         Steps:
         1. Navigate to URL with hash `#/formula-grapher`
         2. Wait for app to render
-        3. Verify the `tab-manager` reports the active tab and the tab content is visible
+        3. Verify the `view-manager` reports the active tab and the tab content is visible
         """
         return {
             "test_name": "Direct Link to Tool via URL",
@@ -130,7 +130,7 @@ class WebTestSuite:
                     "action": "evaluate_script",
                     "params": {
                         "function": """() => {
-                            const manager = document.getElementById('tab-manager');
+                            const manager = document.getElementById('view-manager');
                             const active = manager && typeof manager.getActive === 'function' ? manager.getActive() : (document.querySelector('.tab-button.active')?.dataset.tab || null);
                             const heading = document.querySelector('#formula-grapher-tab h2')?.textContent || '';
                             return { active, heading };

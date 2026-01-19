@@ -1,6 +1,6 @@
 import "./components/ui/at-dropdown.js";
 import "./components/ui/theme-toggle.js";
-import "./components/ui/tab-manager.js";
+import "./components/ui/view-manager.js";
 import { saveSchema, getSchema } from "./components/ui/schema-store.js";
 import { getDropdown, setDropdownOptions, formatRelativeTime } from "./modules/dom-utils.js";
 import { toast } from "./modules/toast.js";
@@ -291,7 +291,7 @@ function wireDropdowns() {
 }
 
 function setActiveTab(tabName) {
-    const manager = document.querySelector('at-tab-manager');
+    const manager = document.querySelector('at-view-manager');
     manager?.setActive(tabName, true);
 }
 

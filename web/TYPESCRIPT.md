@@ -72,7 +72,7 @@ window.compressFormulaFromUI(
 
 ### Custom Web Component Types
 
-[web/src/types/dom.d.ts](web/src/types/dom.d.ts) defines custom HTML elements like `<at-dropdown>`, `<at-tab-manager>`, etc.
+[web/src/types/dom.d.ts](web/src/types/dom.d.ts) defines custom HTML elements like `<at-dropdown>`, `<at-view-manager>`, etc.
 
 Example:
 ```typescript
@@ -105,7 +105,7 @@ dropdown.clear();          // TypeScript knows this method exists
 
 ### Phase 3: Convert Web Components
 - [ ] `components/ui/at-dropdown.js` → `src/components/ui/at-dropdown.ts`
-- [ ] `components/ui/tab-manager.js` → `src/components/ui/tab-manager.ts`
+- [ ] `components/ui/view-manager.js` → `src/components/ui/view-manager.ts`
 - [ ] `components/ui/theme-toggle.js` → `src/components/ui/theme-toggle.ts`
 
 ### Phase 4: Convert Tab Modules

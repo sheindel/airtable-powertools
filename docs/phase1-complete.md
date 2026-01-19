@@ -38,7 +38,7 @@ This is the **key benefit**: compile-time type safety for PyScript calls.
 
 Defines custom HTML elements:
 - `AtDropdownElement` - `<at-dropdown>` component
-- `AtTabManagerElement` - `<at-tab-manager>` component
+- `AtViewManagerElement` - `<at-view-manager>` component
 - `AtThemeToggleElement` - `<at-theme-toggle>` component
 
 ### 4. Directory Structure Created ✅

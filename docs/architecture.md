@@ -28,7 +28,7 @@ Both environments share core analysis modules but execute in fundamentally diffe
 - **Tailwind CSS 3.4.17**: Utility-first CSS framework with JIT compilation
 - **TypeScript 5.9.3**: Type-safe JavaScript for web components
 - **Mermaid.js**: Flowchart rendering from text definitions
-- **Web Components**: Custom HTML elements for reusable UI (theme-toggle, at-dropdown, tab-manager)
+- **Web Components**: Custom HTML elements for reusable UI (theme-toggle, at-dropdown, view-manager)
 
 #### Build & Development Tools
 - **npm**: Node package manager for frontend dependencies
@@ -913,7 +913,7 @@ npm ci                   # Clean install (CI/CD)
     │   └── ui/                  # Web components
     │       ├── theme-toggle.js  # Dark mode toggle
     │       ├── at-dropdown.js   # Custom dropdown
-    │       └── tab-manager.js   # Tab switching
+    │       └── view-manager.js   # View switching (formerly tab-manager)
     ├── tabs/                    # Independent tab modules
     │   ├── dependency_mapper.py
     │   ├── formula_compressor.py

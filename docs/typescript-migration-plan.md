@@ -31,7 +31,7 @@ This document outlines the plan to migrate the JavaScript codebase to TypeScript
 **Web Components (4 files):**
 - `web/components/ui/at-dropdown.js` (~200 lines) - Custom dropdown component
 - `web/components/ui/schema-store.js` (~50 lines) - LocalStorage abstraction
-- `web/components/ui/tab-manager.js` - Tab navigation component
+- `web/components/ui/view-manager.js` - View/navigation component
 - `web/components/ui/theme-toggle.js` - Dark mode toggle
 
 **Build Config:**
@@ -220,7 +220,7 @@ interface AtDropdownElement extends HTMLElement {
   selectById(optionId: string): void;
 }
 
-interface AtTabManagerElement extends HTMLElement {
+interface AtViewManagerElement extends HTMLElement {
   setActive(tabName: string, emit?: boolean): void;
 }
 
@@ -231,7 +231,7 @@ interface AtThemeToggleElement extends HTMLElement {
 declare global {
   interface HTMLElementTagNameMap {
     'at-dropdown': AtDropdownElement;
-    'at-tab-manager': AtTabManagerElement;
+    'at-view-manager': AtViewManagerElement;
     'at-theme-toggle': AtThemeToggleElement;
   }
 }
@@ -268,7 +268,7 @@ export {};
 ⚠️ **Medium Risk** - DOM APIs, event handling
 
 1. `web/components/ui/at-dropdown.js` → `web/src/components/ui/at-dropdown.ts`
-2. `web/components/ui/tab-manager.js` → `web/src/components/ui/tab-manager.ts`
+2. `web/components/ui/view-manager.js` → `web/src/components/ui/view-manager.ts`
 3. `web/components/ui/theme-toggle.js` → `web/src/components/ui/theme-toggle.ts`
 
 **Benefits:**

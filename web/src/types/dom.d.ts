@@ -16,7 +16,7 @@ export interface AtDropdownElement extends HTMLElement {
   selectById(optionId: string): void;
 }
 
-export interface AtTabManagerElement extends HTMLElement {
+export interface AtViewManagerElement extends HTMLElement {
   setActive(tabName: string, emit?: boolean): void;
   getActive(): string | null;
 }
@@ -39,7 +39,7 @@ export interface TabChangeEventDetail {
 declare global {
   interface HTMLElementTagNameMap {
     'at-dropdown': AtDropdownElement;
-    'at-tab-manager': AtTabManagerElement;
+    'at-view-manager': AtViewManagerElement;
     'at-theme-toggle': AtThemeToggleElement;
   }
 

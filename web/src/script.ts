@@ -5,7 +5,7 @@
 
 // Import web components
 import './components/ui/theme-toggle.js';
-import './components/ui/tab-manager.js';
+import './components/ui/view-manager.js';
 import './components/ui/at-dropdown.js';
 
 import { getDropdown, setDropdownOptions } from './modules/dom-utils.js';

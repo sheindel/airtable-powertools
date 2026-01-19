@@ -35,13 +35,13 @@ dropdown.addEventListener('select', (e: CustomEvent<DropdownSelectEventDetail>) 
 const id = dropdown.selectedId;  // string | null (explicit)
 ```
 
-### 2. Converted tab-manager.js to TypeScript ✅
-**File:** [web/src/components/ui/tab-manager.ts](../web/src/components/ui/tab-manager.ts)
+### 2. Converted view-manager.js to TypeScript ✅
+**File:** [web/src/components/ui/view-manager.ts](../web/src/components/ui/view-manager.ts)
 
 **Component:** Tab navigation with mobile dropdown support
 
 **Improvements:**
-- Implements `AtTabManagerElement` interface
+- Implements `AtViewManagerElement` interface
 - Extended `window` interface for Python callback
 - Type-safe `TabChangeEventDetail` custom event
 - Proper querySelector generics (`querySelectorAll<HTMLElement>`)
@@ -105,10 +105,10 @@ web/dist/components/ui/
 ├── at-dropdown.js.map    (5.2K - source map)
 ├── at-dropdown.d.ts      (1.4K - type declarations)
 ├── at-dropdown.d.ts.map  (1.1K - declaration map)
-├── tab-manager.js        (4.1K)
-├── tab-manager.js.map    (3.5K)
-├── tab-manager.d.ts      (1.3K)
-├── tab-manager.d.ts.map  (679B)
+├── view-manager.js        (4.1K)
+├── view-manager.js.map    (3.5K)
+├── view-manager.d.ts      (1.3K)
+├── view-manager.d.ts.map  (679B)
 ├── theme-toggle.js       (3.8K)
 ├── theme-toggle.js.map   (2.1K)
 ├── theme-toggle.d.ts     (887B)
@@ -222,9 +222,9 @@ export declare class AtDropdown extends HTMLElement implements AtDropdownElement
 }
 ```
 
-### tab-manager.d.ts (Excerpt)
+### view-manager.d.ts (Excerpt)
 ```typescript
-export declare class AtTabManager extends HTMLElement implements AtTabManagerElement {
+export declare class AtViewManager extends HTMLElement implements AtViewManagerElement {
     setActive(tabName: string, emit?: boolean): void;
     getActive(): string | null;
 }
@@ -270,7 +270,7 @@ export declare class ThemeToggle extends HTMLElement implements AtThemeToggleEle
 | Component | Lines (JS) | Lines (TS) | Complexity | Type Safety Gain |
 |-----------|------------|------------|------------|------------------|
 | at-dropdown | 185 | 229 | High | ⭐⭐⭐⭐⭐ Excellent |
-| tab-manager | 115 | 145 | Medium | ⭐⭐⭐⭐ High |
+| view-manager | 115 | 145 | Medium | ⭐⭐⭐⭐ High |
 | theme-toggle | 100 | 140 | Low | ⭐⭐⭐⭐ High |
 
 **Total:** ~400 lines → ~514 lines (29% increase for comprehensive type safety)
@@ -381,7 +381,7 @@ new CustomEvent<DropdownSelectEventDetail>('select', { ... });
 
 **Phase 3: Web Components** ✅
 - at-dropdown.ts
-- tab-manager.ts
+- view-manager.ts
 - theme-toggle.ts
 
 ### Files Converted: 6

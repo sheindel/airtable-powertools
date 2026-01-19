@@ -203,7 +203,7 @@ Ready to convert Web Components:
 - Event handling with CustomEvent<T>
 - Complex state management
 
-### 2. tab-manager.js → TypeScript
+### 2. view-manager.js → TypeScript
 - Tab navigation component
 - Event dispatching
 - Active state tracking

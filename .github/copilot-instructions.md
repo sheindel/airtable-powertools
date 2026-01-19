@@ -34,7 +34,7 @@ mermaid = graph_to_mermaid(subgraph, direction="TD")
 Six independent tabs ([web/tabs/](web/tabs/)) initialized by [web/main.py](web/main.py):
 - Each tab is a self-contained module (~50-200 lines)
 - Shared utilities in [web/components/](web/components/)
-- Web components in [web/components/ui/](web/components/ui/) (at-dropdown, theme-toggle, tab-manager)
+- Web components in [web/components/ui/](web/components/ui/) (at-dropdown, theme-toggle, view-manager)
 - Module structure enables parallel development without conflicts
 
 ## Development Workflows
