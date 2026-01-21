@@ -181,7 +181,7 @@ if not AIRTABLE_API_KEY:
 @app.command()
 def get_airtable_metadata(
     table_name: Optional[str] = None, 
-    verbose: bool = False,
+    verbose: bool = Option(False, "--verbose", "--no-verbose", help="Verbose output"),
     output_filename: Optional[Path] = None
 ):
     """Get Airtable metadata for the configured base."""
@@ -215,17 +215,6 @@ def get_airtable_metadata(
         print(json.dumps(data))
 
     return data
-
-
-
-@app.command()
-def airtable_formula_to_mermaid_graph(
-    field_id: str,
-    verbose: bool = False
-):
-    # First remove any unnecessary whitespace (whitespace not in strings)
-
-    pass
 
 
 airtable_function_names = [
@@ -578,9 +567,9 @@ def generate_mermaid_graph(
     table_name: str = "",
     field_name: str = "",
     flowchart_type: str = "TD",
-    full_field_description: bool = False,
-    verbose: bool = False,
-    v2: bool = False,
+    full_field_description: bool = Option(False, "--full-field-description", "--no-full-field-description", help="Include full field descriptions"),
+    verbose: bool = Option(False, "--verbose", "--no-verbose", help="Verbose output"),
+    v2: bool = Option(False, "--v2", "--no-v2", help="Use v2 graph generation"),
     direction: str = "both",
     max_depth: int = 3
 ):
@@ -845,7 +834,7 @@ def graph_formula_logic(
     table_name: str,
     field_name: str,
     flowchart_direction: str = "TD",
-    expand_fields: bool = False,
+    expand_fields: bool = Option(False, "--expand-fields", "--no-expand-fields", help="Expand referenced formula fields inline"),
     max_expansion_depth: int = 1,
     output_file: Optional[Path] = None
 ):
@@ -1051,9 +1040,9 @@ def generate_evaluator(
     output_file: str = Option(..., "--output", "-o", help="Output Python file path"),
     table_id: str = Option(..., "--table-id", "-t", help="Table ID to generate evaluator for"),
     mode: str = Option("dataclass", "--mode", "-m", help="Data access mode: 'dataclass', 'dict', or 'pydantic'"),
-    null_checks: bool = Option(True, "--null-checks/--no-null-checks", help="Include null safety checks in generated code"),
-    type_hints: bool = Option(True, "--type-hints/--no-type-hints", help="Include type hints in generated code"),
-    docstrings: bool = Option(True, "--docstrings/--no-docstrings", help="Include docstrings in generated code"),
+    null_checks: bool = Option(True, "--null-checks", "--no-null-checks", help="Include null safety checks in generated code"),
+    type_hints: bool = Option(True, "--type-hints", "--no-type-hints", help="Include type hints in generated code"),
+    docstrings: bool = Option(True, "--docstrings", "--no-docstrings", help="Include docstrings in generated code"),
 ):
     """
     Generate a Python formula evaluator with incremental computation
