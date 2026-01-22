@@ -68,6 +68,17 @@
           },
           "id": "fldfjydT8vN8Bed0e",
           "name": "Resources"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tbloTX03WhnwIhNPj",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldhu7zpHMgPMCkma"
+          },
+          "id": "fldQvvDGYkHBluBa9",
+          "name": "Invoices"
         }
       ],
       "views": [
@@ -151,6 +162,28 @@
           },
           "id": "fldQbaa5pUEvT9kjo",
           "name": "Events"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblI1EP0VwZtJFlpV",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldvwXOZe1M7YI7Lz"
+          },
+          "id": "flds7wom7lNfAkqFc",
+          "name": "Sales Pipeline"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tbloTX03WhnwIhNPj",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fld7cnW79K15XuR7M"
+          },
+          "id": "fldAjkZVeCkU2QAfl",
+          "name": "Invoices"
         }
       ],
       "views": [
@@ -301,6 +334,28 @@
           },
           "id": "fldRQdNA3KwV1mvcA",
           "name": "Milestones"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblI1EP0VwZtJFlpV",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldYW4FXenUWyoar8"
+          },
+          "id": "fldFrEygPVBjyDwSK",
+          "name": "Sales Pipeline"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tbloTX03WhnwIhNPj",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldVKcvMUSEtWa4gg"
+          },
+          "id": "fldn4vPl0II7Gvehg",
+          "name": "Invoices"
         }
       ],
       "views": [
@@ -637,6 +692,17 @@
           "type": "multilineText",
           "id": "fldWt8xb6nKy8Kt7C",
           "name": "Notes"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tbloTX03WhnwIhNPj",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldviXXwvZf59F2XF"
+          },
+          "id": "fldXKUgxIquvcLkHM",
+          "name": "Invoices"
         }
       ],
       "views": [
@@ -925,7 +991,7 @@
           "type": "formula",
           "options": {
             "isValid": true,
-            "formula": "REPT('\u2588', ROUND({fldpNGyi0FtBaj6Ru}/10)) & REPT('\u2591', 10-ROUND({fldpNGyi0FtBaj6Ru}/10))",
+            "formula": "REPT('█', ROUND({fldpNGyi0FtBaj6Ru}/10)) & REPT('░', 10-ROUND({fldpNGyi0FtBaj6Ru}/10))",
             "referencedFieldIds": [
               "fldpNGyi0FtBaj6Ru"
             ],
@@ -1004,7 +1070,7 @@
               "fldRf7Ia4v1DnZHXf"
             ],
             "prompt": [
-              "You are a professional project manager skilled at distilling key points and identifying project risks or decisions from project documentation. Focus on clarity and conciseness, using a neutral and informative tone suitable for project status reporting.\n\nTask description:\nCarefully read the provided milestone notes and current milestone status. Identify and summarize significant information, including any critical risks, major decisions, blockers, or action items mentioned. If no significant points are present, indicate that explicitly. Avoid repeating general status details unless they are directly relevant to key notes.\n\nOutput format:\nSummarize the most significant points, risks, or decisions as a plain text paragraph. Do not include headings, introductory phrases, or any extra commentary\u2014only the essential notes. If nothing significant is found, output \"No significant notes to summarize.\" For example: \"Client requested design changes. Budget approval delayed. Awaiting vendor feedback on supplies.\" (Typical output will be 1-3 sentences for standard notes.)\n\nContext and Data:\nMilestone Notes: ",
+              "You are a professional project manager skilled at distilling key points and identifying project risks or decisions from project documentation. Focus on clarity and conciseness, using a neutral and informative tone suitable for project status reporting.\n\nTask description:\nCarefully read the provided milestone notes and current milestone status. Identify and summarize significant information, including any critical risks, major decisions, blockers, or action items mentioned. If no significant points are present, indicate that explicitly. Avoid repeating general status details unless they are directly relevant to key notes.\n\nOutput format:\nSummarize the most significant points, risks, or decisions as a plain text paragraph. Do not include headings, introductory phrases, or any extra commentary—only the essential notes. If nothing significant is found, output \"No significant notes to summarize.\" For example: \"Client requested design changes. Budget approval delayed. Awaiting vendor feedback on supplies.\" (Typical output will be 1-3 sentences for standard notes.)\n\nContext and Data:\nMilestone Notes: ",
               {
                 "field": {
                   "fieldId": "fldP8iIeaANCJw8mN"
@@ -1021,11 +1087,548 @@
           },
           "id": "fldJEMDgsrdF7pPcS",
           "name": "Significant Notes Summary"
+        },
+        {
+          "type": "checkbox",
+          "options": {
+            "icon": "thumbsUp",
+            "color": "greenBright"
+          },
+          "id": "fldDIFZ4nYGFjxTVw",
+          "name": "Overdue?"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selsjc2SrCjuEgn3Q",
+                "name": "Operational",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selyQXTsl2iQv5o8R",
+                "name": "Client-Facing",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selpwBJsvpxCXQYwL",
+                "name": "Internal",
+                "color": "tealLight2"
+              },
+              {
+                "id": "sel0iz8D0EmwRAeQ6",
+                "name": "Deliverable",
+                "color": "greenLight2"
+              },
+              {
+                "id": "selamrNME9O8mSnyg",
+                "name": "Kickoff",
+                "color": "yellowLight2"
+              },
+              {
+                "id": "selDVwve3Rxl5xHzd",
+                "name": "Review",
+                "color": "orangeLight2"
+              },
+              {
+                "id": "selQnLII4FLH0lGXw",
+                "name": "Handover",
+                "color": "redLight2"
+              }
+            ]
+          },
+          "id": "fld1KfGDQYWCZh7aT",
+          "name": "Milestone Category"
+        },
+        {
+          "type": "aiText",
+          "options": {
+            "referencedFieldIds": [
+              "fldGU3Jd7eZ8c5o9A",
+              "fldMJyoVMYcUw7D9c",
+              "fldM6Q3HnDBRO6v9S",
+              "fldpNGyi0FtBaj6Ru"
+            ],
+            "prompt": [
+              "You are a professional project manager skilled at clearly summarizing milestone progress for stakeholders in a concise and objective manner. Your writing is factual, focused on outcomes, and free of unnecessary detail.\n\nTask description:\nAnalyze the provided information about related tasks for the milestone to clearly summarize current progress. Identify the overall status, highlight tasks completed versus total tasks, estimate completion percentage, mention any blockers, and note any observable trends in the progress. Focus on clarity and brevity, presenting only the most important information to understand milestone progress at a glance.\n\nOutput format:\nSummarize milestone progress in 2-4 full sentences, referencing both qualitative and quantitative indicators (e.g., counts and percentages of tasks completed, any delays or obstacles). Do not include headings, labels, or additional commentary. Output the summary as plain text only. If you cannot determine the progress due to missing information, output \"Progress summary unavailable due to insufficient data.\" Example: \"6 out of 10 tasks for this milestone are complete (60%). Progress is steady, with 2 tasks awaiting review. No major blockers are reported, and overall status is on track.\"\n\nContext and Data:\nRelated Tasks: ",
+              {
+                "field": {
+                  "fieldId": "fldGU3Jd7eZ8c5o9A"
+                }
+              },
+              "\nCompleted Tasks Count: ",
+              {
+                "field": {
+                  "fieldId": "fldMJyoVMYcUw7D9c"
+                }
+              },
+              "\nTotal Related Tasks: ",
+              {
+                "field": {
+                  "fieldId": "fldM6Q3HnDBRO6v9S"
+                }
+              },
+              "\nTasks Completion %: ",
+              {
+                "field": {
+                  "fieldId": "fldpNGyi0FtBaj6Ru"
+                }
+              },
+              "\n\nOutput:\n"
+            ]
+          },
+          "id": "fldOjHZr8ifZSwFUi",
+          "name": "Task Progress Summary"
+        },
+        {
+          "type": "formula",
+          "options": {
+            "isValid": true,
+            "formula": "IF(AND({fldRf7Ia4v1DnZHXf} != 'Achieved', {fldgxOv7ikpSIWuRB} < TODAY()), DATETIME_DIFF(TODAY(), {fldgxOv7ikpSIWuRB}, 'days'), BLANK())",
+            "referencedFieldIds": [
+              "fldRf7Ia4v1DnZHXf",
+              "fldgxOv7ikpSIWuRB"
+            ],
+            "result": {
+              "type": "number",
+              "options": {
+                "precision": 0
+              }
+            }
+          },
+          "id": "fldbi3mJtUv0H7CP6",
+          "name": "Days Overdue"
+        },
+        {
+          "type": "aiText",
+          "options": {
+            "referencedFieldIds": [
+              "fldlSa5k3haYIlYab",
+              "fldRf7Ia4v1DnZHXf",
+              "fldF1nbiOn0kjWwRG",
+              "fldpNGyi0FtBaj6Ru",
+              "fldP8iIeaANCJw8mN"
+            ],
+            "prompt": [
+              "You are an experienced risk analyst specializing in project management. Your goal is to provide clear, reasoned explanations for assigned risk levels based on milestone status, timeline, and task completion. Use a formal and concise tone suitable for reporting to stakeholders.\n\nTask description:\nEvaluate the milestone's risk level with supporting rationale. Consider the milestone's current status, proximity to the deadline, completion percentage of related tasks, and any relevant notes. Cite specific indicators—such as falling behind schedule, low completion rates, or notable issues in notes—to justify why the risk is categorized as Low, Moderate, or High.\n\nOutput format:\nProvide a brief explanation (1-3 sentences) supporting the risk level assessment. Focus only on project and task indicators mentioned in the context and data. Do not include headings, option lists, risk level labels, or extra commentary. Output the explanation as plain text only. If no sufficient relevant context is given, state: \"Cannot assess risk level due to missing information.\" Example: \"Risk is moderate because only 40% of tasks are complete with 5 days remaining, and delays are noted in the project notes.\"\n\nContext and Data:\nMilestone Risk Level: ",
+              {
+                "field": {
+                  "fieldId": "fldlSa5k3haYIlYab"
+                }
+              },
+              "\nStatus: ",
+              {
+                "field": {
+                  "fieldId": "fldRf7Ia4v1DnZHXf"
+                }
+              },
+              "\nDays Until Target: ",
+              {
+                "field": {
+                  "fieldId": "fldF1nbiOn0kjWwRG"
+                }
+              },
+              "\nTasks Completion %: ",
+              {
+                "field": {
+                  "fieldId": "fldpNGyi0FtBaj6Ru"
+                }
+              },
+              "\nNotes: ",
+              {
+                "field": {
+                  "fieldId": "fldP8iIeaANCJw8mN"
+                }
+              },
+              "\n\nOutput:\n"
+            ]
+          },
+          "id": "flds31zgfWvWC1jt1",
+          "name": "Risk Comments"
         }
       ],
       "views": [
         {
           "id": "viwFNG3BrEWPFAKpL",
+          "name": "Grid view",
+          "type": "grid"
+        }
+      ]
+    },
+    {
+      "id": "tblI1EP0VwZtJFlpV",
+      "name": "Sales Pipeline",
+      "primaryFieldId": "fldPfYz2tCvTJRndC",
+      "fields": [
+        {
+          "type": "singleLineText",
+          "id": "fldPfYz2tCvTJRndC",
+          "name": "Lead/Deal Name"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "sel9pX5S1ey4B07Ik",
+                "name": "Inbound",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selleSfdOdMhEpKne",
+                "name": "Outbound",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selOGJooJTM00MJKL",
+                "name": "Referral",
+                "color": "tealLight2"
+              },
+              {
+                "id": "sels23icPwZmIyHTv",
+                "name": "Web",
+                "color": "greenLight2"
+              },
+              {
+                "id": "selGw0FZvnCfE5BGT",
+                "name": "Other",
+                "color": "yellowLight2"
+              }
+            ]
+          },
+          "id": "fldGoxLzNsbMlC3Pv",
+          "name": "Lead Source"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selLBTgmcHzCI4o7o",
+                "name": "New",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selHALcPqnE1pBtq6",
+                "name": "Contacted",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "selrTMboDsg1l28XQ",
+                "name": "Qualified",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selQymmjlxyxqCrQA",
+                "name": "Proposal Sent",
+                "color": "greenLight2"
+              },
+              {
+                "id": "selyqTamqRN2g5sYr",
+                "name": "Quote Sent",
+                "color": "yellowLight2"
+              },
+              {
+                "id": "selfEUt8ALZ8tN0M4",
+                "name": "Closed Won",
+                "color": "orangeLight2"
+              },
+              {
+                "id": "selFihpmxJooKY442",
+                "name": "Closed Lost",
+                "color": "redLight2"
+              }
+            ]
+          },
+          "id": "fldjgHPf9bAVbP4dA",
+          "name": "Lead Status"
+        },
+        {
+          "type": "singleCollaborator",
+          "id": "fldnERG7npt7l1Imd",
+          "name": "Lead Owner"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblntPwM2nhOtJYIL",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "flds7wom7lNfAkqFc"
+          },
+          "id": "fldvwXOZe1M7YI7Lz",
+          "name": "Potential Client"
+        },
+        {
+          "type": "currency",
+          "options": {
+            "precision": 2,
+            "symbol": "$"
+          },
+          "id": "fldnwSkh0mbFxDFUo",
+          "name": "Estimated Value"
+        },
+        {
+          "type": "number",
+          "options": {
+            "precision": 0
+          },
+          "id": "fldi90fnlLwL9SIO8",
+          "name": "Close Probability (%)"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": {
+              "name": "local",
+              "format": "l"
+            }
+          },
+          "id": "fldheUieZha4af3tz",
+          "name": "Expected Close Date"
+        },
+        {
+          "type": "multipleAttachments",
+          "options": {
+            "isReversed": true
+          },
+          "id": "fldfQYkUKmpn4Wbc1",
+          "name": "Quote/Proposal Document"
+        },
+        {
+          "type": "currency",
+          "options": {
+            "precision": 2,
+            "symbol": "$"
+          },
+          "id": "fld2QZuVKYuo1hc8n",
+          "name": "Quote Amount"
+        },
+        {
+          "type": "checkbox",
+          "options": {
+            "icon": "thumbsUp",
+            "color": "greenBright"
+          },
+          "id": "fldLCKBiiRqcS28Nk",
+          "name": "Project Created?"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblbaKbAEQV98W9aW",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldFrEygPVBjyDwSK"
+          },
+          "id": "fldYW4FXenUWyoar8",
+          "name": "Associated Project"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": {
+              "name": "local",
+              "format": "l"
+            }
+          },
+          "id": "fld9LogAU0jlLkrby",
+          "name": "Agreement Signed Date"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": {
+              "name": "local",
+              "format": "l"
+            }
+          },
+          "id": "fldJkbUem4T3UJree",
+          "name": "Converted to Project Date"
+        },
+        {
+          "type": "multilineText",
+          "id": "fldfltxWakI3aULZP",
+          "name": "Notes"
+        },
+        {
+          "type": "multilineText",
+          "id": "fldkxFafjx9QMYU1m",
+          "name": "Sales Stage Notes"
+        },
+        {
+          "type": "singleLineText",
+          "id": "fld0BST9O2HHfaWK3",
+          "name": "Deal Loss Reason"
+        }
+      ],
+      "views": [
+        {
+          "id": "viwA4lyzGZRYOpX0o",
+          "name": "Grid view",
+          "type": "grid"
+        }
+      ]
+    },
+    {
+      "id": "tbloTX03WhnwIhNPj",
+      "name": "Invoices",
+      "primaryFieldId": "fldcnXt5PiHRdSQ0m",
+      "fields": [
+        {
+          "type": "singleLineText",
+          "id": "fldcnXt5PiHRdSQ0m",
+          "name": "Invoice Number"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblbaKbAEQV98W9aW",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldn4vPl0II7Gvehg"
+          },
+          "id": "fldVKcvMUSEtWa4gg",
+          "name": "Project"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": {
+              "name": "local",
+              "format": "l"
+            }
+          },
+          "id": "fldz0ESVIbaD76jZt",
+          "name": "Invoice Date"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": {
+              "name": "local",
+              "format": "l"
+            }
+          },
+          "id": "fld8bnN7gFJZhLled",
+          "name": "Due Date"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblntPwM2nhOtJYIL",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldAjkZVeCkU2QAfl"
+          },
+          "id": "fld7cnW79K15XuR7M",
+          "name": "Client"
+        },
+        {
+          "type": "currency",
+          "options": {
+            "precision": 2,
+            "symbol": "$"
+          },
+          "id": "fldmXKLDAs7pp6okV",
+          "name": "Total Amount"
+        },
+        {
+          "type": "singleSelect",
+          "options": {
+            "choices": [
+              {
+                "id": "selDuV6ayDkmBJbnD",
+                "name": "Draft",
+                "color": "blueLight2"
+              },
+              {
+                "id": "selqCSGqIiKezpLiU",
+                "name": "Sent",
+                "color": "cyanLight2"
+              },
+              {
+                "id": "sel7oZR7mXE5gdhW4",
+                "name": "Paid",
+                "color": "tealLight2"
+              },
+              {
+                "id": "selMlB0W2r3LhbG1i",
+                "name": "Overdue",
+                "color": "greenLight2"
+              },
+              {
+                "id": "selbGV5onytaC1KQ4",
+                "name": "Cancelled",
+                "color": "yellowLight2"
+              }
+            ]
+          },
+          "id": "fldGWwVqnUjGKYtOz",
+          "name": "Status"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": {
+              "name": "local",
+              "format": "l"
+            }
+          },
+          "id": "fldELoIE3lCAxJN1H",
+          "name": "Payment Received Date"
+        },
+        {
+          "type": "multipleAttachments",
+          "options": {
+            "isReversed": true
+          },
+          "id": "fldgaYSn39lT5WZVF",
+          "name": "PDF Invoice"
+        },
+        {
+          "type": "multilineText",
+          "id": "fldq4gB2daPSsI3LX",
+          "name": "Invoice Notes"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tbl622YB7LCEUgXhy",
+            "isReversed": false,
+            "prefersSingleRecordLink": true,
+            "inverseLinkFieldId": "fldQvvDGYkHBluBa9"
+          },
+          "id": "fldhu7zpHMgPMCkma",
+          "name": "Contact for Billing"
+        },
+        {
+          "type": "multipleRecordLinks",
+          "options": {
+            "linkedTableId": "tblvf9UH8qzTO2Zcn",
+            "isReversed": false,
+            "prefersSingleRecordLink": false,
+            "inverseLinkFieldId": "fldXKUgxIquvcLkHM"
+          },
+          "id": "fldviXXwvZf59F2XF",
+          "name": "Related Resources"
+        },
+        {
+          "type": "date",
+          "options": {
+            "dateFormat": {
+              "name": "local",
+              "format": "l"
+            }
+          },
+          "id": "fldGAK6XUlEe1Y1ae",
+          "name": "Project Completion Date"
+        }
+      ],
+      "views": [
+        {
+          "id": "viwU8FKHij7A3xPUh",
           "name": "Grid view",
           "type": "grid"
         }
