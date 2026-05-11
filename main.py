@@ -1,5 +1,6 @@
 import json
 import os
+import re
 import subprocess
 import tomllib
 from pathlib import Path
@@ -145,6 +146,11 @@ def run_web():
                     content = content.replace(
                         '<span id="app-version">v0.1.0</span>',
                         f'<span id="app-version">{version_string}</span>'
+                    )
+                    content = re.sub(
+                        r'<span id="setup-app-version"[^>]*>[^<]*</span>',
+                        f'<span id="setup-app-version">{version_string}</span>',
+                        content
                     )
                     
                     # Send response

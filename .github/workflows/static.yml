@@ -84,6 +84,7 @@ jobs:
           
           # Replace version in index.html with tooltip
           sed -i "s|<span id=\"app-version\"[^>]*>v[0-9.-]*</span>|<span id=\"app-version\" title=\"${TOOLTIP_ESCAPED}\" class=\"cursor-help\">${DISPLAY_VERSION}</span>|g" web/index.html
+          sed -i "s|<span id=\"setup-app-version\"[^>]*>v[0-9.-]*</span>|<span id=\"setup-app-version\" title=\"${TOOLTIP_ESCAPED}\">${DISPLAY_VERSION}</span>|g" web/index.html
       
       - name: Setup Pages
         uses: actions/configure-pages@v5
