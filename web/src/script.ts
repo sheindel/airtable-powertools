@@ -478,6 +478,11 @@ async function fetchSchemaAndUpdateUI(): Promise<void> {
                 "Content-Type": "application/json"
             }
         });
+        if (!response.ok) {
+            const errorBody = await response.json().catch(() => null) as { error?: { message?: string } } | null;
+            const message = errorBody?.error?.message || response.statusText;
+            throw new Error(`${response.status}: ${message}`);
+        }
         const schema = await response.json() as AirtableSchema;
         saveSchema(schema);
         
