@@ -486,12 +486,23 @@ async function fetchSchemaAndUpdateUI(): Promise<void> {
         const schema = await response.json() as AirtableSchema;
         saveSchema(schema);
         
+        // Hide any previous error
+        const errorPanel = document.getElementById('schema-load-error');
+        errorPanel?.classList.add('hidden');
+
         // Update UI after fetching schema
         const schemaData = getSchema();
         updateUIBasedOnSchema(true, schemaData);
         updateSchemaInfo();
     } catch (error) {
         console.error("Error fetching schema:", error);
+        const message = error instanceof Error ? error.message : String(error);
+        const errorPanel = document.getElementById('schema-load-error');
+        const errorMsg = document.getElementById('schema-load-error-message');
+        if (errorPanel && errorMsg) {
+            errorMsg.textContent = `Failed to retrieve schema: ${message}`;
+            errorPanel.classList.remove('hidden');
+        }
         toast.error("Failed to retrieve schema.");
     }
 }
